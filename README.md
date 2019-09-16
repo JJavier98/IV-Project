@@ -1,2 +1,2 @@
 # IV-Project
-Preyecto de la asignatura Infraestructuras Virtuales
+Proyecto de la asignatura Infraestructuras Virtuales
