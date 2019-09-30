@@ -21,3 +21,4 @@ Para que la **inscripción** a la comunidad sea posible es necesario encontrar l
 - **Despliegue de contenedores:** Docker
 - **Integración Contínua:** Travis CI
 - **Despliegue en la nube:** Azure o, en su defecto, Heroku
+- **Tests:** Mocha
