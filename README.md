@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # :zap: Gestión de comunidades energéticas
 
 ## :page_facing_up: Contextualización
@@ -22,7 +21,3 @@ Para que la **inscripción** a la comunidad sea posible es necesario encontrar l
 - **Despliegue de contenedores:** Docker
 - **Integración Contínua:** Travis CI
 - **Despliegue en la nube:** Azure o, en su defecto, Heroku
-=======
-# IV-Project:
-## Sistema de reservas en un restaurante.
->>>>>>> 73075943caeb975d6a404071677589ce039e56e1
