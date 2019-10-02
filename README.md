@@ -13,7 +13,7 @@ Para **inscribirse** a una comunidad se pide obligatoriamente un código de **do
 
 Para que la **inscripción** a la comunidad sea posible es necesario encontrar la **comunidad más cercana** utilizando las coordenadas GPS de la comunidad y del DER. En cualquier caso la distancia no puede ser mayor de 500 metros.
 
-## :computer: Tecnologías
+## :computer: Tecnologías 
 
 - **Lenguaje:** Node.js
 - **Framework:** ExpressJS
