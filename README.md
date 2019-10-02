@@ -13,12 +13,15 @@ Para **inscribirse** a una comunidad se pide obligatoriamente un código de **do
 
 Para que la **inscripción** a la comunidad sea posible es necesario encontrar la **comunidad más cercana** utilizando las coordenadas GPS de la comunidad y del DER. En cualquier caso la distancia no puede ser mayor de 500 metros.
 
-## :computer: Tecnologías
+## :computer: Herramientas
 
-- **Lenguaje:** Node.js
-- **Framework:** ExpressJS
-- **Base de datos:** MongoDB
-- **Despliegue de contenedores:** Docker
-- **Integración Contínua:** Travis CI
-- **Despliegue en la nube:** Azure o, en su defecto, Heroku
-- **Tests:** Mocha
+En general, todas las herramientas que aquí aparecen han sido escogidas por su popularidad y el prestigio ganado en la comunidad de desarrolladores.
+
+- **Lenguaje:** Utilizaremos **Node.js** como lenguaje debido a sus especificaciones (liviano y eficiente).
+- **Framework:** Para ayudarnos a montar el microservicio utilizaremos el framework **ExpressJS**.
+- **Base de datos:** Como biblioteca para manejar base de datos: **MongoDB**.
+- **Despliegue de contenedores:** Para crear contenedores usaremos **Docker**.
+- **Integración Contínua:** Para implementar CI en el el proyecto vamos a usar **Travis CI**.
+- **Despliegue en la nube:** Desplegaremos el microseervicio en **Azure** o, en su defecto, **Heroku**.
+- **Tests:** Para realizar de test durante el desarrollo: **Mocha**.
+- **Logs:** El framework ExpressJS proporciona un sistema logs. Si no fuera suficiente con el mismo se buscaría una biblioteca más completa para este propósito.
