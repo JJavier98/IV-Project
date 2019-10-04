@@ -1,0 +1,31 @@
+{
+  "name": "energy_manager",
+  "version": "1.0.0",
+  "description": "API REST para ayudar a gestores de comunidades energéticas a llevar a cabo su trabajo. Crea, actualiza y borra comunidades energéticas con una serie de restricciones.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JJavier98/IV-Project.git"
+  },
+  "keywords": [
+    "node",
+    "energy",
+    "manager",
+    "managment",
+    "API",
+    "REST"
+  ],
+  "author": "José Javier Alonso Ramos",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/JJavier98/IV-Project/issues"
+  },
+  "homepage": "https://github.com/JJavier98/IV-Project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mocha": "^6.2.1"
+  }
+}
