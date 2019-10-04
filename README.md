@@ -18,10 +18,10 @@ Para que la **inscripción** a la comunidad sea posible es necesario encontrar l
 En general, todas las herramientas que aquí aparecen han sido escogidas por su popularidad y el prestigio ganado en la comunidad de desarrolladores.
 
 - **Lenguaje:** Utilizaremos **Node.js** como lenguaje debido a sus especificaciones (liviano y eficiente).
-- **Framework:** Para ayudarnos a montar el microservicio utilizaremos el framework **ExpressJS**.
+- **Framework API REST:** Para ayudarnos a montar el microservicio utilizaremos el framework **ExpressJS**.
 - **Base de datos:** Como biblioteca para manejar base de datos: **MongoDB**.
 - **Despliegue de contenedores:** Para crear contenedores usaremos **Docker**.
 - **Integración Contínua:** Para implementar CI en el el proyecto vamos a usar **Travis CI**.
 - **Despliegue en la nube:** Desplegaremos el microseervicio en **Azure** o, en su defecto, **Heroku**.
-- **Tests:** Para realizar de test durante el desarrollo: **Mocha**.
-- **Logs:** El framework ExpressJS proporciona un sistema logs. Si no fuera suficiente con el mismo se buscaría una biblioteca más completa para este propósito.
+- **Framework Tests:** Para realizar de test durante el desarrollo: **Mocha**.
+- **Logs:** El framework ExpressJS proporciona un sistema logs. Si no fuera suficiente con el mismo se buscaría un servicio más completo para este propósito.
