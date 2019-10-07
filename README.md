@@ -1,5 +1,7 @@
 # :zap: Gestión de comunidades energéticas
 
+[![Build Status](https://travis-ci.org/JJavier98/IV-Project.svg?branch=master)](https://travis-ci.org/JJavier98/IV-Project)
+
 ## :page_facing_up: Contextualización
 Suponemos la existencia de una app de comunidades energéticas para los gestores de estas comunidades. Los gestores informarán a los miembros de la comunidad cuándo es el mejor momento de producir o consumir energía a través de la app. Los miembros de la comunidad poseen algún tipo de recurso energético distribuido (DER) que puede ser programado para consumir o generar energía (instalación fotovoltaica, batería, cargador de coche eléctrico, aire acondicionado inteligente...)
 
