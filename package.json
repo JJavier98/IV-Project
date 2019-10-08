@@ -27,5 +27,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mocha": "^6.2.1"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.3"
   }
 }
