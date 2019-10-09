@@ -4,7 +4,8 @@
   "description": "API REST para ayudar a gestores de comunidades energéticas a llevar a cabo su trabajo. Crea, actualiza y borra comunidades energéticas con una serie de restricciones.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "mocha test/*.js",
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -26,9 +27,13 @@
   "homepage": "https://github.com/JJavier98/IV-Project#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mocha": "^6.2.1"
+    "express-validator": "^6.2.0",
+    "mocha": "^6.2.1",
+    "morgan": "^1.9.1",
+    "nano": "^8.1.0"
   },
   "devDependencies": {
-    "jsdoc": "^3.6.3"
+    "jsdoc": "^3.6.3",
+    "nodemon": "^1.19.3"
   }
 }
