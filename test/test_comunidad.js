@@ -34,7 +34,7 @@ describe('Clase Comunidad', function() {
     });
     
     it('should assign correct value to gestor attribute', function() {
-        assert.equal(c.gestor, g1)
+        assert.equal(c.gestor_dni, g1.dni)
     });
     
     it('should assign correct object type to miembros attribute', function() {
