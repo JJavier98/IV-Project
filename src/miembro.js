@@ -35,6 +35,17 @@ class Miembro {
                 this.community_name == miembro.community_name &&
                 this.gestor == miembro.gestor)
     }
+
+    toJSON() {
+        return {
+            'dni': this.dni,
+            'name': this.name,
+            'last_name': this.last_name,
+            'DER_name': this.DER_name,
+            'community_name': this.community_name,
+            'gestor': this.gestor
+        }
+    }
 }
 
 module.exports = Miembro
