@@ -99,3 +99,6 @@ public
 
 # JSON Data Base local files
 db
+
+# Out-files
+out
