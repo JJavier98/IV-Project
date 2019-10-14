@@ -1,16 +1,22 @@
 {
+  // Datos referentes al proyecto desarrollado
   "name": "energy_manager",
   "version": "1.0.0",
   "description": "API REST para ayudar a gestores de comunidades energéticas a llevar a cabo su trabajo. Crea, actualiza y borra comunidades energéticas con una serie de restricciones.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*.js",
+    "test": "mocha test/*.js", // Script para la ejecución de tests
+    /* Script para una ejecución más cómoda del proyecto
+    En cada guardado se reinicia la ejecución para evitar 
+    cambiar entre código y consola con tanta asiduidad */
     "dev": "nodemon src/index.js"
   },
+  // Repositorio donde se encuentra alojado el proyecto
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JJavier98/IV-Project.git"
   },
+  // Palabras clave relacionadas
   "keywords": [
     "node",
     "js",
@@ -23,18 +29,21 @@
   ],
   "author": "José Javier Alonso Ramos",
   "license": "GPL-3.0",
+  // Para notificar bugs/fallos:
   "bugs": {
     "url": "https://github.com/JJavier98/IV-Project/issues"
   },
+  // Acceso al README del proyecto
   "homepage": "https://github.com/JJavier98/IV-Project#readme",
+  // Dependencias necesarias para la ejecución de la aplicación
   "dependencies": {
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
-    "lowdb": "^1.0.0",
     "mocha": "^6.2.1",
     "morgan": "^1.9.1",
     "nano": "^8.1.0"
   },
+  // Dependencias necesarias para el desarrollo
   "devDependencies": {
     "jsdoc": "^3.6.3",
     "nodemon": "^1.19.3"

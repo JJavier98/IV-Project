@@ -14,22 +14,6 @@ miembro.asignarDERname(comunidad.name);
 miembro.asignarDERname(der.name);
 comunidad.insertarMiembro(miembro);
 
-// TODO: comprobar que no repetimos datos
-function insertDB(object) {
-    if (object instanceof Miembro) {
-        fs.appendFileSync('db/members.json', JSON.stringify(object.toJSON(), null, 2));
-    }
-    else if (object instanceof Gestor) {
-        fs.appendFileSync('db/managers.json', JSON.stringify(object.toJSON(), null, 2));
-    }
-    else if (object instanceof Comunidad) {
-        fs.appendFileSync('db/communities.json', JSON.stringify(object.toJSON(), null, 2));
-    }
-    else if (object instanceof DER) {
-        fs.appendFileSync('db/communities.json', JSON.stringify(object.toJSON(), null, 2));
-    }
-}
-
 fs.appendFileSync('db/members.json', JSON.stringify(miembro.toJSON(), null, 2));
 
 console.log(miembro)
