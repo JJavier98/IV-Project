@@ -8,25 +8,31 @@ const DER         = require('../src/DER');
 const f           = require('../src/functions');
 var assert        = require('assert');
 
+// Testeo de las funciones para trabajar con los archivos JSON
 describe('Funciones DB', function() {
+    // Creamos la db
     const db = low(new FileSync('db/energy.json'));
-
+    // Definimos una estructura por defecto
     db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
     .write();
 
+    // Declaración de datos para probar las funciones
     var miembro = new Miembro('00000000-X', 'Pepe', 'López');
     var miembro1 = new Miembro('00000000-X', 'Pepo', 'García');
     var miembro2 = new Miembro('11111111-Y', 'Juan', 'López');
     var gestor = new Gestor('00000000-Y', 'Paco', 'Pérez');
     var comunidad = new Comunidad('Com #1', 'Descripción', 90, 85, gestor);
     var der = new DER('DER #1', 90, 85);
-
+    // Compleción de los datos
     gestor.asignarCommunityName(comunidad);
     miembro.asignarCommunityName(comunidad);
     miembro.asignarDERname(der);
     miembro1.asignarCommunityName(comunidad);
     miembro1.asignarDERname(der);
     comunidad.insertarMiembro(miembro);
+
+    // Creamos una promesa para asegurar las inserciones en
+    // la db antes de manipularla
     let p = new Promise( (resolve, reject) => {
         f.insertDB(miembro);
         f.insertDB(miembro1);
@@ -37,6 +43,7 @@ describe('Funciones DB', function() {
         resolve('Yo!');
     })
 
+    // Insertamos un miembro y comprobamos su correcta inserción
     it('should insert a member in the DB', function() {
         p.then( () => {
             var size = db.get('miembros').size().value();
@@ -50,6 +57,7 @@ describe('Funciones DB', function() {
         }).catch( () => {})
     });
 
+    // Intentamos insertar un miembro distinto pero con la misma clave primaria
     it('should not insert an object with the same key that any other object has', function() {
         p.then( () => {
             var size = db.get('miembros').size().value();
@@ -57,6 +65,7 @@ describe('Funciones DB', function() {
         }).catch( () => {})
     });
 
+    // Intentamos insertar un miembro con atributos sin definir
     it('should not insert an object with undefined attributes', function() {
         p.then( () => {
             var size = db.get('miembros').size().value();
@@ -64,7 +73,8 @@ describe('Funciones DB', function() {
         }).catch( () => {})
     });
 
-    it('should insert DER and Community objects in their correct place', function() {
+    // Insertamos un gestor, DER y comunidad y comprobamos que se insertan en su correcto lugar.
+    it('should insert gestor, DER and Community objects in their correct place', function() {
         p.then( () => {
             var size1 = db.get('comunidades').size().value();
             var size2 = db.get('der').size().value();
@@ -75,6 +85,7 @@ describe('Funciones DB', function() {
         }).catch( () => {})
     });
 
+    // Borramos un miembro y comprobamos que ya no está en la db
     it('should remove member', function() {
         p.then( () => {
             f.deleteXfromDB(miembro);

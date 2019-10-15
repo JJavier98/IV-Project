@@ -1,4 +1,32 @@
-// Bibliotecas
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: functions.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: functions.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Bibliotecas
 const low         = require('lowdb')
 const FileSync    = require('lowdb/adapters/FileSync')
 const Miembro     = require('../src/miembro');
@@ -20,11 +48,11 @@ db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
  */
 function insertDB(object) {
     // Si el objeto es un Miembro
-    if (object instanceof Miembro && object.gestor == false) {
+    if (object instanceof Miembro &amp;&amp; object.gestor == false) {
         // Si no existe y está bien formado
-        if (db.get('miembros').find({dni: object.dni}).value() == undefined &&
-            object.DER_name != undefined &&
-            object.community_name != undefined &&
+        if (db.get('miembros').find({dni: object.dni}).value() == undefined &amp;&amp;
+            object.DER_name != undefined &amp;&amp;
+            object.community_name != undefined &amp;&amp;
             object.gestor == false)
         {
             db.get('miembros')
@@ -47,8 +75,8 @@ function insertDB(object) {
     // Si el objeto es un Gestor
     else if (object instanceof Gestor) {
         // Si no existe y está bien formado
-        if (db.get('gestores').find({dni: object.dni}).value() == undefined &&
-            object.DER_name == undefined && object.community_name != undefined &&
+        if (db.get('gestores').find({dni: object.dni}).value() == undefined &amp;&amp;
+            object.DER_name == undefined &amp;&amp; object.community_name != undefined &amp;&amp;
             object.gestor == true)
         {
             db.get('gestores')
@@ -71,9 +99,9 @@ function insertDB(object) {
     // Si el objeto es una Comunidad
     else if (object instanceof Comunidad) {
         // Si no existe y está bien formado
-        if (db.get('comunidades').find({name: object.name}).value() == undefined &&
-            object.desc != undefined &&
-            object.latitud != undefined &&
+        if (db.get('comunidades').find({name: object.name}).value() == undefined &amp;&amp;
+            object.desc != undefined &amp;&amp;
+            object.latitud != undefined &amp;&amp;
             object.longitud != undefined)
         {
             db.get('comunidades')
@@ -96,9 +124,9 @@ function insertDB(object) {
     // Si el objeto es un DER
     else if (object instanceof DER) {
         // Si no existe y está bien formado
-        if (db.get('der').find({name: object.name}).value() == undefined &&
-            object.latitud != undefined &&
-            object.longitud != undefined &&
+        if (db.get('der').find({name: object.name}).value() == undefined &amp;&amp;
+            object.latitud != undefined &amp;&amp;
+            object.longitud != undefined &amp;&amp;
             object.type != undefined)
         {
             db.get('der')
@@ -126,10 +154,10 @@ function insertDB(object) {
  * @returns {void}
  */
 function updateDB(object) {
-    if (object instanceof Miembro && object.gestor == false) {
-        if (db.get('miembros').find({dni: object.dni}).value() != undefined &&
-        object.DER_name != undefined &&
-        object.community_name != undefined &&
+    if (object instanceof Miembro &amp;&amp; object.gestor == false) {
+        if (db.get('miembros').find({dni: object.dni}).value() != undefined &amp;&amp;
+        object.DER_name != undefined &amp;&amp;
+        object.community_name != undefined &amp;&amp;
         object.gestor == false)
         {
             db.get('miembros')
@@ -151,8 +179,8 @@ function updateDB(object) {
         }
     }
     else if (object instanceof Gestor) {
-        if (db.get('gestores').find({dni: object.dni}).value() != undefined &&
-        object.DER_name == undefined && object.community_name != undefined &&
+        if (db.get('gestores').find({dni: object.dni}).value() != undefined &amp;&amp;
+        object.DER_name == undefined &amp;&amp; object.community_name != undefined &amp;&amp;
         object.gestor == true)
         {
             db.get('gestores')
@@ -173,9 +201,9 @@ function updateDB(object) {
         }
     }
     else if (object instanceof Comunidad) {
-        if (db.get('comunidades').find({name: object.name}).value() != undefined &&
-        object.desc != undefined &&
-        object.latitud != undefined &&
+        if (db.get('comunidades').find({name: object.name}).value() != undefined &amp;&amp;
+        object.desc != undefined &amp;&amp;
+        object.latitud != undefined &amp;&amp;
         object.longitud != undefined)
         {
             db.get('comunidades')
@@ -196,9 +224,9 @@ function updateDB(object) {
         }
     }
     else if (object instanceof DER) {
-        if (db.get('der').find({name: object.name}).value() != undefined &&
-        object.latitud != undefined &&
-        object.longitud != undefined &&
+        if (db.get('der').find({name: object.name}).value() != undefined &amp;&amp;
+        object.latitud != undefined &amp;&amp;
+        object.longitud != undefined &amp;&amp;
         object.type != undefined)
         {
             db.get('der')
@@ -226,10 +254,10 @@ function updateDB(object) {
  * @returns {void}
  */
 function deleteXfromDB(object) {
-    if (object instanceof Miembro && object.gestor == false) {
-        if (db.get('miembros').find({dni: object.dni}).value() != undefined &&
-        object.DER_name != undefined &&
-        object.community_name != undefined &&
+    if (object instanceof Miembro &amp;&amp; object.gestor == false) {
+        if (db.get('miembros').find({dni: object.dni}).value() != undefined &amp;&amp;
+        object.DER_name != undefined &amp;&amp;
+        object.community_name != undefined &amp;&amp;
         object.gestor == false)
         {
             db.get('miembros')
@@ -245,8 +273,8 @@ function deleteXfromDB(object) {
         }
     }
     else if (object instanceof Gestor) {
-        if (db.get('gestores').find({dni: object.dni}).value() != undefined &&
-        object.DER_name == undefined && object.community_name != undefined &&
+        if (db.get('gestores').find({dni: object.dni}).value() != undefined &amp;&amp;
+        object.DER_name == undefined &amp;&amp; object.community_name != undefined &amp;&amp;
         object.gestor == true)
         {
             db.get('gestores')
@@ -262,9 +290,9 @@ function deleteXfromDB(object) {
         }
     }
     else if (object instanceof Comunidad) {
-        if (db.get('comunidades').find({name: object.name}).value() != undefined &&
-        object.desc != undefined &&
-        object.latitud != undefined &&
+        if (db.get('comunidades').find({name: object.name}).value() != undefined &amp;&amp;
+        object.desc != undefined &amp;&amp;
+        object.latitud != undefined &amp;&amp;
         object.longitud != undefined)
         {
             db.get('comunidades')
@@ -280,9 +308,9 @@ function deleteXfromDB(object) {
         }
     }
     else if (object instanceof DER) {
-        if (db.get('der').find({name: object.name}).value() != undefined &&
-        object.latitud != undefined &&
-        object.longitud != undefined &&
+        if (db.get('der').find({name: object.name}).value() != undefined &amp;&amp;
+        object.latitud != undefined &amp;&amp;
+        object.longitud != undefined &amp;&amp;
         object.type != undefined)
         {
             db.get('der')
@@ -304,4 +332,26 @@ console.log(m)
 
 module.exports.insertDB = insertDB;
 module.exports.updateDB = updateDB;
-module.exports.deleteXfromDB = deleteXfromDB;
+module.exports.deleteXfromDB = deleteXfromDB;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Comunidad.html">Comunidad</a></li><li><a href="DER.html">DER</a></li><li><a href="Gestor.html">Gestor</a></li><li><a href="Miembro.html">Miembro</a></li></ul><h3>Global</h3><ul><li><a href="global.html#deleteXfromDB">deleteXfromDB</a></li><li><a href="global.html#insertDB">insertDB</a></li><li><a href="global.html#updateDB">updateDB</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Oct 15 2019 10:15:39 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
