@@ -12,4 +12,4 @@ A la izquierda en **negrita** vemos el comando que usaremos en la terminal. A la
 
 **npm test** ejecuta los tests necesarios para comprobar el buen funcionamiento de las funciones y métodos.
 **npm dev** es un comando útil para desarrolladores que reinicia la ejecución del proyecto por cada cambio realizado para aplicarlo inmediatamente y ver los cambios en nuestro navegador.
-**npm doc** genera la documentación que se está leyendo ahora mismo.
+**npm doc** genera la documentación que se está leyendo ahora
