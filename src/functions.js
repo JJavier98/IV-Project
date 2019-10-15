@@ -238,7 +238,7 @@ function updateDB(object) {
  * @returns {void}
  */
 function deleteXfromDB(object) {
-    if (object instanceof Miembro && object.gestor == false) {
+    if (object instanceof Miembro && object.gestor == false) 
         if (db.get('miembros').find({dni: object.dni}).value() != undefined &&
         object.DER_name != undefined &&
         object.community_name != undefined &&
