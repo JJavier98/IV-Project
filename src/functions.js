@@ -32,7 +32,7 @@ db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
  */
 function insertDB(object) {
     // Si el objeto es un Miembro
-    if (object instanceof Miembro) {
+    if (object instanceof Miembro && object.gestor == false) {
         // Si no existe y está bien formado
         if (db.get('miembros').find({dni: object.dni}).value() == undefined &&
             object.DER_name != undefined &&
@@ -50,10 +50,10 @@ function insertDB(object) {
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('miembros').find({dni: object.dni}).value() != undefined) {
-            console.error('Ya existe una instancia con esa clave.\n Para modificarla use \'updateDB()\'');
+            console.error('Ya existe un miembro con esa clave.\n Para modificarla use \'updateDB()\'');
         }
         else {
-            console.error('Algunos atributos no contienen valores válidos');
+            console.error('Algunos atributos de miembro no contienen valores válidos');
         }
     }
     // Si el objeto es un Gestor
@@ -74,10 +74,10 @@ function insertDB(object) {
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('gestores').find({dni: object.dni}).value() != undefined) {
-            console.error('Ya existe una instancia con esa clave.\n Para modificarla use \'updateDB()\'');
+            console.error('Ya existe un gestor con esa clave.\n Para modificarla use \'updateDB()\'');
         }
         else {
-            console.error('Algunos atributos no contienen valores válidos');
+            console.error('Algunos atributos del gestor no contienen valores válidos');
         }
     }
     // Si el objeto es una Comunidad
@@ -99,10 +99,10 @@ function insertDB(object) {
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
-            console.error('Ya existe una instancia con esa clave.\n Para modificarla use \'updateDB()\'');
+            console.error('Ya existe una comunidad con esa clave.\n Para modificarla use \'updateDB()\'');
         }
         else {
-            console.error('Algunos atributos no contienen valores válidos');
+            console.error('Algunos atributos de la comunidad no contienen valores válidos');
         }
     }
     // Si el objeto es un DER
@@ -122,10 +122,10 @@ function insertDB(object) {
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('der').find({name: object.name}).value() != undefined) {
-            console.error('Ya existe una instancia con esa clave.\n Para modificarla use \'updateDB()\'');
+            console.error('Ya existe un DER con esa clave.\n Para modificarla use \'updateDB()\'');
         }
         else {
-            console.error('Algunos atributos no contienen valores válidos');
+            console.error('Algunos atributos del DER no contienen valores válidos');
         }
     }
 }
@@ -138,7 +138,7 @@ function insertDB(object) {
  * @returns {void}
  */
 function updateDB(object) {
-    if (object instanceof Miembro) {
+    if (object instanceof Miembro && object.gestor == false) {
         if (db.get('miembros').find({dni: object.dni}).value() != undefined &&
         object.DER_name != undefined &&
         object.community_name != undefined &&
@@ -155,7 +155,7 @@ function updateDB(object) {
             .value()
         }
         // Si no existe un objeto con la misma clave
-        else if (db.get('miembros').find({dni: object.dni}).value() != undefined) {
+        else if (db.get('miembros').find({dni: object.dni}).value() == undefined) {
             console.error('NO existe una instancia con esa clave.');
         }
         else {
@@ -177,7 +177,7 @@ function updateDB(object) {
             .value()
         }
         // Si no existe un objeto con la misma clave
-        else if (db.get('gestores').find({dni: object.dni}).value() != undefined) {
+        else if (db.get('gestores').find({dni: object.dni}).value() == undefined) {
             console.error('NO existe una instancia con esa clave.');
         }
         else {
@@ -200,7 +200,7 @@ function updateDB(object) {
             .value()
         }
         // Si no existe un objeto con la misma clave
-        else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
+        else if (db.get('comunidades').find({name: object.name}).value() == undefined) {
             console.error('NO existe una instancia con esa clave.');
         }
         else {
@@ -221,7 +221,7 @@ function updateDB(object) {
             .value()
         }
         // Si no existe un objeto con la misma clave
-        else if (db.get('der').find({name: object.name}).value() != undefined) {
+        else if (db.get('der').find({name: object.name}).value() == undefined) {
             console.error('NO existe una instancia con esa clave.');
         }
         else {
@@ -238,8 +238,82 @@ function updateDB(object) {
  * @returns {void}
  */
 function deleteXfromDB(object) {
-
+    if (object instanceof Miembro && object.gestor == false) {
+        if (db.get('miembros').find({dni: object.dni}).value() != undefined &&
+        object.DER_name != undefined &&
+        object.community_name != undefined &&
+        object.gestor == false)
+        {
+            db.get('miembros')
+            .remove({dni: object.dni})
+            .write()
+        }
+        // Si no existe un objeto con la misma clave
+        else if (db.get('miembros').find({dni: object.dni}).value() == undefined) {
+            console.error('NO existe una instancia con esa clave.');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    else if (object instanceof Gestor) {
+        if (db.get('gestores').find({dni: object.dni}).value() != undefined &&
+        object.DER_name == undefined && object.community_name != undefined &&
+        object.gestor == true)
+        {
+            db.get('gestores')
+            .remove({dni: object.dni})
+            .write()
+        }
+        // Si no existe un objeto con la misma clave
+        else if (db.get('gestores').find({dni: object.dni}).value() == undefined) {
+            console.error('NO existe una instancia con esa clave.');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    else if (object instanceof Comunidad) {
+        if (db.get('comunidades').find({name: object.name}).value() != undefined &&
+        object.desc != undefined &&
+        object.latitud != undefined &&
+        object.longitud != undefined)
+        {
+            db.get('comunidades')
+            .remove({name: object.name})
+            .write()
+        }
+        // Si no existe un objeto con la misma clave
+        else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
+            console.error('NO existe una instancia con esa clave.');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    else if (object instanceof DER) {
+        if (db.get('der').find({name: object.name}).value() != undefined &&
+        object.latitud != undefined &&
+        object.longitud != undefined &&
+        object.type != undefined)
+        {
+            db.get('der')
+            .remove({name: object.name})
+            .write()
+        }
+        // Si no existe un objeto con la misma clave
+        else if (db.get('der').find({name: object.name}).value() != undefined) {
+            console.error('NO existe una instancia con esa clave.');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
 }
+
+var m = db.get('miembros').size().value()
+console.log(m)
 
 module.exports.insertDB = insertDB;
 module.exports.updateDB = updateDB;
+module.exports.deleteXfromDB = deleteXfromDB;
