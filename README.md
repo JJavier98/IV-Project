@@ -21,9 +21,8 @@ En general, todas las herramientas que aquí aparecen han sido escogidas por su 
 
 - **Lenguaje:** Utilizaremos **Node.js** como lenguaje debido a sus especificaciones (liviano y eficiente).
 - **Framework API REST:** Para ayudarnos a montar el microservicio utilizaremos el framework **ExpressJS**.
-- **Base de datos:** Como biblioteca para manejar base de datos: **MongoDB**.
+- **Base de datos:** Como biblioteca para manejar base de datos: **CouchDB**.
 - **Despliegue de contenedores:** Para crear contenedores usaremos **Docker**.
 - **Integración Contínua:** Para implementar CI en el el proyecto vamos a usar **Travis CI**.
-- **Despliegue en la nube:** Desplegaremos el microseervicio en **Azure** o, en su defecto, **Heroku**.
 - **Framework Tests:** Para realizar de test durante el desarrollo: **Mocha**.
 - **Logs:** El framework ExpressJS proporciona un sistema logs. Si no fuera suficiente con el mismo se buscaría un servicio más completo para este propósito.
