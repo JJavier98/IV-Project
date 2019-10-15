@@ -98,7 +98,7 @@ public
 .dynamodb/
 
 # JSON Data Base local files
-db/*
+.json
 
 # Out-files
 out
