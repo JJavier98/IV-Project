@@ -1,3 +1,8 @@
+/**
+ * Página principal no acabada.
+ * Accede a la documentación de las demás clases
+ * con el índice a la derecha.
+ */
 // Bibliotecas
 // const nano        = require('nano')('http://localhost:5984');
 const express     = require('express');
