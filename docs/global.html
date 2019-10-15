@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Comunidad</title>
+    <title>JSDoc: Global</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Comunidad</h1>
+    <h1 class="page-title">Global</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Comunidad<span class="signature">(name, desc, latitud, longitud, gestor)</span><span class="type-signature"></span></h2>
+        <h2></h2>
         
     
 </header>
@@ -38,171 +38,7 @@
     
         
 
-    
-
-    
-    <h4 class="name" id="Comunidad"><span class="type-signature"></span>new Comunidad<span class="signature">(name, desc, latitud, longitud, gestor)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Constructor de la clase
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
         
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Nombre de la comunidad</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>desc</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">float</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Descripción de la comunidad</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>latitud</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">float</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Valor de la latitud en la que se encuentra la comunidad</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>longitud</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">float</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Valor de la longitud en la que se encuentra la comunidad</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>gestor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Gestor.html">Gestor</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Gestor de la comunidad</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
 
 
 <dl class="details">
@@ -232,11 +68,6 @@
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="comunidad.js.html">comunidad.js</a>, <a href="comunidad.js.html#line11">line 11</a>
-    </li></ul></dd>
-    
 
     
 
@@ -246,24 +77,7 @@
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     
     </div>
 
@@ -290,7 +104,7 @@
     
 
     
-    <h4 class="name" id="addGestorDNI"><span class="type-signature"></span>addGestorDNI<span class="signature">(gestor)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="deleteXfromDB"><span class="type-signature"></span>deleteXfromDB<span class="signature">(object)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -298,7 +112,8 @@
 
 
 <div class="description">
-    Añadir gestor a la comunidad
+    Elimina un objeto en la base de datos
+siempre y cuando pertenezca a ella con anterioridad
 </div>
 
 
@@ -334,13 +149,22 @@
 
         <tr>
             
-                <td class="name"><code>gestor</code></td>
+                <td class="name"><code>object</code></td>
             
 
             <td class="type">
             
                 
+<span class="param-type"><a href="Miembro.html">Miembro</a></span>
+|
+
 <span class="param-type"><a href="Gestor.html">Gestor</a></span>
+|
+
+<span class="param-type"><a href="Comunidad.html">Comunidad</a></span>
+|
+
+<span class="param-type"><a href="DER.html">DER</a></span>
 
 
             
@@ -350,7 +174,7 @@
 
             
 
-            <td class="description last">Gestor a añadir</td>
+            <td class="description last">Instancia a eliminar de la DB</td>
         </tr>
 
     
@@ -391,7 +215,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="comunidad.js.html">comunidad.js</a>, <a href="comunidad.js.html#line41">line 41</a>
+        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line221">line 221</a>
     </li></ul></dd>
     
 
@@ -445,7 +269,7 @@
     
 
     
-    <h4 class="name" id="insertarMiembro"><span class="type-signature"></span>insertarMiembro<span class="signature">(miembro)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="insertDB"><span class="type-signature"></span>insertDB<span class="signature">(object)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -453,7 +277,8 @@
 
 
 <div class="description">
-    Agrega un miembro a la comunidad
+    Inserta un nuevo objeto en la base de datos
+si todavía no pertenece a ella
 </div>
 
 
@@ -489,13 +314,22 @@
 
         <tr>
             
-                <td class="name"><code>miembro</code></td>
+                <td class="name"><code>object</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type"><a href="Miembro.html">Miembro</a></span>
+|
+
+<span class="param-type"><a href="Gestor.html">Gestor</a></span>
+|
+
+<span class="param-type"><a href="Comunidad.html">Comunidad</a></span>
+|
+
+<span class="param-type"><a href="DER.html">DER</a></span>
 
 
             
@@ -505,7 +339,7 @@
 
             
 
-            <td class="description last">Nuevo miembro</td>
+            <td class="description last">Nueva instancia a agregar a la DB</td>
         </tr>
 
     
@@ -546,7 +380,172 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="comunidad.js.html">comunidad.js</a>, <a href="comunidad.js.html#line31">line 31</a>
+        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateDB"><span class="type-signature"></span>updateDB<span class="signature">(object)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Modifica un objeto en la base de datos
+siempre y cuando pertenezca a ella con anterioridad
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Miembro.html">Miembro</a></span>
+|
+
+<span class="param-type"><a href="Gestor.html">Gestor</a></span>
+|
+
+<span class="param-type"><a href="Comunidad.html">Comunidad</a></span>
+|
+
+<span class="param-type"><a href="DER.html">DER</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Instancia a modificar de la DB</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -616,7 +615,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Oct 15 2019 10:15:39 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Oct 15 2019 10:23:39 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
