@@ -7,7 +7,19 @@ const Comunidad   = require('../src/comunidad');
 const DER         = require('../src/DER');
 const fs          = require('fs');
 
+/**
+ * Creamos el archivo que actuará como base de datos
+ * @const {low}
+ */
 const db = low(new FileSync('db/energy.json'));
+
+/**
+ * Definimos una estructura básica para la db
+ * @param miembros Almacena todos los miembros
+ * @param gestores Almacena todos los gestores
+ * @param comunidades Almacena las comunidades controladas por el sistema
+ * @param der Almacena los dispositivos DER de todas las comunidades del sistema
+ */ 
 db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
 .write();
 
@@ -226,7 +238,7 @@ function updateDB(object) {
  * @returns {void}
  */
 function deleteXfromDB(object) {
-    if (object instanceof Miembro && object.gestor == false) 
+    if (object instanceof Miembro && object.gestor == false) {
         if (db.get('miembros').find({dni: object.dni}).value() != undefined &&
         object.DER_name != undefined &&
         object.community_name != undefined &&
