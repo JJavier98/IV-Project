@@ -99,6 +99,3 @@ public
 
 # JSON Data Base local files
 .json
-
-# Out-files
-out
