@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha test/*.js",
     "dev": "nodemon src/index.js",
-    "doc": "jsdoc src/*.js -d ./docs"
+    "doc": "jsdoc src/*.js ./docs/main_page.md -d ./docs"
   },
   "repository": {
     "type": "git",
