@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: functions.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: functions.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Bibliotecas
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const Miembro     = require('../src/miembro');
+const Gestor      = require('../src/gestor');
+const Comunidad   = require('../src/comunidad');
+const DER         = require('../src/DER');
+const fs          = require('fs');
+
+/**
+ * Creamos el archivo que actuará como base de datos
+ * @const {low}
+ */
+const db = low(new FileSync('db/energy.json'));
+
+/**
+ * Definimos una estructura básica para la db
+ * @param miembros Almacena todos los miembros
+ * @param gestores Almacena todos los gestores
+ * @param comunidades Almacena las comunidades controladas por el sistema
+ * @param der Almacena los dispositivos DER de todas las comunidades del sistema
+ */ 
+db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
+.write();
+
+/**
+ * Inserta un nuevo objeto en la base de datos
+ * si todavía no pertenece a ella
+ * @function insertDB
+ * @param {Miembro | Gestor | Comunidad | DER} object Nueva instancia a agregar a la DB
+ * @returns {void}
+ */
+function insertDB(object) {
+    // Si el objeto es un Miembro
+    if (object instanceof Miembro) {
+        // Si no existe y está bien formado
+        if (db.get('miembros').find({dni: object.dni}).value() == undefined &amp;&amp;
+            object.DER_name != undefined &amp;&amp;
+            object.community_name != undefined &amp;&amp;
+            object.gestor == false)
+        {
+            db.get('miembros')
+            .push({dni: object.dni,
+                name: object.name,
+                last_name: object.last_name,
+                DER_name: object.DER_name,
+                community_name: object.community_name,
+                gestor: object.gestor})
+            .write()
+        }
+        // Si ya existe un objeto con la misma clave
+        else if (db.get('miembros').find({dni: object.dni}).value() != undefined) {
+            console.error('Ya existe una instancia con esa clave.\n Para modificarla use \'updateDB()\'');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    // Si el objeto es un Gestor
+    else if (object instanceof Gestor) {
+        // Si no existe y está bien formado
+        if (db.get('gestores').find({dni: object.dni}).value() == undefined &amp;&amp;
+            object.DER_name == undefined &amp;&amp; object.community_name != undefined &amp;&amp;
+            object.gestor == true)
+        {
+            db.get('gestores')
+            .push({dni: object.dni,
+                name: object.name,
+                last_name: object.last_name,
+                DER_name: object.DER_name,
+                community_name: object.community_name,
+                gestor: object.gestor})
+            .write()
+        }
+        // Si ya existe un objeto con la misma clave
+        else if (db.get('gestores').find({dni: object.dni}).value() != undefined) {
+            console.error('Ya existe una instancia con esa clave.\n Para modificarla use \'updateDB()\'');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    // Si el objeto es una Comunidad
+    else if (object instanceof Comunidad) {
+        // Si no existe y está bien formado
+        if (db.get('comunidades').find({name: object.name}).value() == undefined &amp;&amp;
+            object.desc != undefined &amp;&amp;
+            object.latitud != undefined &amp;&amp;
+            object.longitud != undefined)
+        {
+            db.get('comunidades')
+            .push({name: object.name,
+                desc: object.desc,
+                latitud : object.latitud,
+                longitud: object.longitud,
+                gestor_dni: object.gestor_dni,
+                miembros: object.miembros})
+            .write()
+        }
+        // Si ya existe un objeto con la misma clave
+        else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
+            console.error('Ya existe una instancia con esa clave.\n Para modificarla use \'updateDB()\'');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    // Si el objeto es un DER
+    else if (object instanceof DER) {
+        // Si no existe y está bien formado
+        if (db.get('der').find({name: object.name}).value() == undefined &amp;&amp;
+            object.latitud != undefined &amp;&amp;
+            object.longitud != undefined &amp;&amp;
+            object.type != undefined)
+        {
+            db.get('der')
+            .push({name: object.name,
+                latitud : object.latitud,
+                longitud: object.longitud,
+                type: object.type})
+            .write()
+        }
+        // Si ya existe un objeto con la misma clave
+        else if (db.get('der').find({name: object.name}).value() != undefined) {
+            console.error('Ya existe una instancia con esa clave.\n Para modificarla use \'updateDB()\'');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+}
+
+/**
+ * Modifica un objeto en la base de datos
+ * siempre y cuando pertenezca a ella con anterioridad
+ * @function updateDB
+ * @param {Miembro | Gestor | Comunidad | DER} object Nueva instancia a modificar de la DB
+ * @returns {void}
+ */
+function updateDB(object) {
+    if (object instanceof Miembro) {
+        if (db.get('miembros').find({dni: object.dni}).value() != undefined &amp;&amp;
+        object.DER_name != undefined &amp;&amp;
+        object.community_name != undefined &amp;&amp;
+        object.gestor == false)
+        {
+            db.get('miembros')
+            .find({dni: object.dni})
+            .assign({dni: object.dni,
+                name: object.name,
+                last_name: object.last_name,
+                DER_name: object.DER_name,
+                community_name: object.community_name,
+                gestor: object.gestor})
+            .value()
+        }
+        // Si no existe un objeto con la misma clave
+        else if (db.get('miembros').find({dni: object.dni}).value() != undefined) {
+            console.error('NO existe una instancia con esa clave.');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    else if (object instanceof Gestor) {
+        if (db.get('gestores').find({dni: object.dni}).value() != undefined &amp;&amp;
+        object.DER_name == undefined &amp;&amp; object.community_name != undefined &amp;&amp;
+        object.gestor == true)
+        {
+            db.get('gestores')
+            .assign({dni: object.dni,
+                name: object.name,
+                last_name: object.last_name,
+                DER_name: object.DER_name,
+                community_name: object.community_name,
+                gestor: object.gestor})
+            .value()
+        }
+        // Si no existe un objeto con la misma clave
+        else if (db.get('gestores').find({dni: object.dni}).value() != undefined) {
+            console.error('NO existe una instancia con esa clave.');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    else if (object instanceof Comunidad) {
+        if (db.get('comunidades').find({name: object.name}).value() != undefined &amp;&amp;
+        object.desc != undefined &amp;&amp;
+        object.latitud != undefined &amp;&amp;
+        object.longitud != undefined)
+        {
+            db.get('comunidades')
+            .assign({name: object.name,
+                desc: object.desc,
+                latitud : object.latitud,
+                longitud: object.longitud,
+                gestor_dni: object.gestor_dni,
+                miembros: object.miembros})
+            .value()
+        }
+        // Si no existe un objeto con la misma clave
+        else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
+            console.error('NO existe una instancia con esa clave.');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+    else if (object instanceof DER) {
+        if (db.get('der').find({name: object.name}).value() != undefined &amp;&amp;
+        object.latitud != undefined &amp;&amp;
+        object.longitud != undefined &amp;&amp;
+        object.type != undefined)
+        {
+            db.get('der')
+            .assign({name: object.name,
+                latitud : object.latitud,
+                longitud: object.longitud,
+                type: object.type})
+            .value()
+        }
+        // Si no existe un objeto con la misma clave
+        else if (db.get('der').find({name: object.name}).value() != undefined) {
+            console.error('NO existe una instancia con esa clave.');
+        }
+        else {
+            console.error('Algunos atributos no contienen valores válidos');
+        }
+    }
+}
+
+module.exports.insertDB = insertDB;
+module.exports.updateDB = updateDB;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#db">db</a></li><li><a href="global.html#insertDB">insertDB</a></li><li><a href="global.html#updateDB">updateDB</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Oct 14 2019 22:20:26 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
