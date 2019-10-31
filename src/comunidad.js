@@ -8,7 +8,7 @@ class Comunidad {
      * @param {float} longitud - Valor de la longitud en la que se encuentra la comunidad
      * @param {Gestor} gestor - Gestor de la comunidad
      */
-    constructor(name, desc, latitud, longitud, gestor) {
+    constructor(name, desc, latitud, longitud, gestor, miembros=undefined) {
         this.name = name            // Clave primaria (String)
         this.desc = desc            // Descripción (String)
         this.latitud = latitud      // Coordenada 1
@@ -19,7 +19,14 @@ class Comunidad {
         else{
             this.gestor_dni = undefined
         }
-        this.miembros = new Set()   // Lista de miembros dueños de un DER
+        if(miembros == undefined)
+        {
+            this.miembros = new Set()   // Lista de miembros dueños de un DER
+        }
+        else
+        {
+            miembros = miembros
+        }
     }
 
     /**

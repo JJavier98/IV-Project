@@ -1,12 +1,13 @@
 // Bibliotecas
 const { Router }  = require('express');
 const router      = Router();
+const Miembro     = require('../miembro.js');
 const bodyParser  = require('body-parser');
-//const low         = require('lowdb')
-//const FileSync    = require('lowdb/adapters/FileSync');
+const low         = require('lowdb')
+const FileSync    = require('lowdb/adapters/FileSync');
 const dbFunc      = require('../functions.js');
-//const db          = low(new FileSync('db/energy.json'));
-//db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
+const db          = low(new FileSync('db/energy.json'));
+db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
 //.write();
 
 var urlencodedParser = bodyParser.urlencoded({extended:true})
@@ -21,7 +22,18 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', urlencodedParser, (req, res) => {
-    console.log(req.body);
+    var data = req.body;
+    var apellido;
+    var dni = (data.DNI).toString() + (data.LetraDNI).toUpperCase();
+
+    if (data.Apellido == '') {
+        apellido = undefined;
+    }
+    else {
+        apellido = data.Apellido;
+    }
+    var nuevo_miembro = new Miembro(dni, data.nombre, apellido, data.DER, data.Comunidad);
+    dbFunc.insertDB(nuevo_miembro);
 });
 
 // Export

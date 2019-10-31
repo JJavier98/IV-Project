@@ -39,14 +39,34 @@ function insertDB(object) {
             object.community_name != undefined &&
             object.gestor == false)
         {
-            db.get('miembros')
-            .push({dni: object.dni,
-                name: object.name,
-                last_name: object.last_name,
-                DER_name: object.DER_name,
-                community_name: object.community_name,
-                gestor: object.gestor})
-            .write()
+            if (db.get('der').find({name: object.DER_name}).value() != undefined &&
+            db.get('comunidades').find({name: object.community_name}).value() != undefined )
+            {
+                db.get('miembros')
+                .push({dni: object.dni,
+                    name: object.name,
+                    last_name: object.last_name,
+                    DER_name: object.DER_name,
+                    community_name: object.community_name,
+                    gestor: object.gestor})
+                .write()
+
+                var com = db.get('comunidades').find({name: object.community_name}).value();
+                var nuevos_miembros = com.miembros;
+                nuevos_miembros[object.dni] = object;
+                console.log(com.gestor_dni)
+                var miembros_set = new Set();
+                for(var exKey in nuevos_miembros) {
+                    miembros_set.add(nuevos_miembros[exKey]);
+                }                
+                //nuevos_miembros.add(object);
+                var nueva_com = new Comunidad(com.name, com.desc, com.latitud, com.longitud, com.gestor_dni, nuevos_miembros);
+                console.log(nueva_com)
+                updateDB(nueva_com);
+            }
+            else {
+                console.error('No existe un DER o una comunidad con esos nombres');
+            }
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('miembros').find({dni: object.dni}).value() != undefined) {
@@ -86,16 +106,21 @@ function insertDB(object) {
         if (db.get('comunidades').find({name: object.name}).value() == undefined &&
             object.desc != undefined &&
             object.latitud != undefined &&
-            object.longitud != undefined)
+            object.longitud != undefined &&
+            object.gestor_dni != undefined &&
+            object.miembros != undefined)
         {
-            db.get('comunidades')
-            .push({name: object.name,
-                desc: object.desc,
-                latitud : object.latitud,
-                longitud: object.longitud,
-                gestor_dni: object.gestor_dni,
-                miembros: object.miembros})
-            .write()
+            if (db.get('gestores').find({dni: object.gestor_dni}).value() != undefined)
+            {
+                db.get('comunidades')
+                .push({name: object.name,
+                    desc: object.desc,
+                    latitud : object.latitud,
+                    longitud: object.longitud,
+                    gestor_dni: object.gestor_dni,
+                    miembros: object.miembros})
+                .write()
+            }
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
@@ -138,7 +163,9 @@ function insertDB(object) {
  * @returns {void}
  */
 function updateDB(object) {
-    if (object instanceof Miembro && object.gestor == false) {
+    if (object instanceof Miembro && object.gestor == false)
+    {
+
         if (db.get('miembros').find({dni: object.dni}).value() != undefined &&
         object.DER_name != undefined &&
         object.community_name != undefined &&
@@ -190,6 +217,15 @@ function updateDB(object) {
         object.latitud != undefined &&
         object.longitud != undefined)
         {
+            console.log(db.get('comunidades')
+            .assign({name: object.name,
+                desc: object.desc,
+                latitud : object.latitud,
+                longitud: object.longitud,
+                gestor_dni: object.gestor_dni,
+                miembros: object.miembros})
+            .value())
+
             db.get('comunidades')
             .assign({name: object.name,
                 desc: object.desc,

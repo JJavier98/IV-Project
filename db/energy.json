@@ -1,5 +1,102 @@
 {
-  "miembros": [],
+  "miembros": [
+    {
+      "dni": "1A",
+      "name": "a",
+      "last_name": "a",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "2A",
+      "name": "a",
+      "last_name": "a",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "3A",
+      "name": "a",
+      "last_name": "a",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "7W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "4W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "5W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "6W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "8W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "9W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "10W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "11W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "12W",
+      "name": "J",
+      "last_name": "A",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    }
+  ],
   "gestores": [
     {
       "dni": "00000000-Y",

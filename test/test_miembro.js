@@ -9,11 +9,11 @@ describe('Clase Miembro', function() {
     // Define Comunidad
     var c = new Comunidad('Com #1', 'Comunidad de paneles solares', 100, 350, undefined)
     // Define Miembro
-    var m1 = new Miembro('12345678-J', 'Pepe', 'López', d, c)
+    var m1 = new Miembro('12345678-J', 'Pepe', 'López', d.name, c.name)
     // Define Miembro
-    var m1_ = new Miembro('12345678-J', 'Pepe', 'López', d, c)
+    var m1_ = new Miembro('12345678-J', 'Pepe', 'López', d.name, c.name)
     // Define Miembro sin apellido
-    var m2 = new Miembro('12345678-J', 'Pepe', undefined, d, c)
+    var m2 = new Miembro('12345678-J', 'Pepe', undefined, d.name, c.name)
     // Define Miembro sin apellido, sin DER y sin comunidad
     var m3 = new Miembro('12345678-J', 'Pepe', undefined, undefined, undefined)
 
