@@ -4,16 +4,11 @@ const router = Router();
 
 // Routes
 router.get('/', (req, res) => {
-    res.json({"Title": "Hello World"});
+    res.render(__dirname+'/views/index.ejs', {
+        title: 'GCE-API'
+    })
 });
 
-router.get('/test', (req, res) => {
-    var data = {
-        "name": "Jota",
-        "age": 21
-    };
-    res.json(data);
-});
 
 // Export
 module.exports = router;

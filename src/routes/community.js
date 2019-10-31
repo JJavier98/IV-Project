@@ -8,6 +8,7 @@ const router = Router();
 
 // Routes
 router.get('/', (req, res) => {
+    console.log(req)
     var data = {
         "name": "Comunidad #1",
         "descripción": "Comunidad de paneles solares"
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
     res.json(data);
 });
 
-router.post('/',[
+router.put('/',[
     check('name', 'A community must have a name form by, at least, 5 characters').not().isEmpty().isString().isLength({min: 5}),
     check('desc', 'The community must have a description').not().isEmpty().isString(),
     ],

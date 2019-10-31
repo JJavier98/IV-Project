@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+</head>
+<body>
+    <h1>Miembros</h1>
+
+    <h3>Índice</h3>
+    <% include partials/navigation.ejs %>
+
+    <h2>Inscripción de miembros</h2>
+    Los campos marcados con * son obligatorios. <br> <br>
+    <form action="/api/member" method="post">
+        <input required type="number" name="DNI" placeholder="* DNI sin letra">
+        <input required type="text" name="LetraDNI" placeholder="* Letra DNI">
+        <input required type="text" name="nombre" placeholder="* Nombre del miembro">
+        <input type="text" name="Apellido" placeholder="Apellido">
+        <input required type="text" name="DER" placeholder="* DER">
+        <input required type="text" name="Comunidad" placeholder="* Comunidad">
+        <input type="submit">
+    </form>
+
+    <h2>Lista de miembros. Total: <%= n_miembros%></h2>
+
+    <table>
+        <tr>
+            <td><strong>Curso</strong></td>
+            <td><strong>Horas</strong></td>
+            <td><strong>Horario</strong></td>
+        </tr>
+
+        <tr>
+            <td>CSS</td>
+            <td>10</td>
+            <td>16:00 - 20:00</td>
+        </tr>
+        
+        <tr>
+            <td>HTML</td>
+            <td>20</td>
+            <td>16:00 - 20:00</td>
+        </tr>
+        
+        <tr>
+            <td>Dreamweaver</td>
+            <td>60</td>
+            <td>16:00 - 20:00</td>
+        </tr>
+    </table>
+
+</body>
+</html>

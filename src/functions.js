@@ -311,9 +311,46 @@ function deleteXfromDB(object) {
     }
 }
 
+/**
+ * Obtiene un objeto de la base de datos
+ * @function getFromDB
+ * @param {String} id Identificador que referencia a un objeto de la DB
+ * @returns {Miembro | Gestor | Comunidad | DER}
+ *//*
+function getFromDB(id) {
+    // Es comunidad o DER
+    if (id instanceof String) {
+        if (id.length > 3)
+        {
+            if(id.substr(0,2) == 'DER') {
+                return db.get('der').find({name: id}).value()
+            }
+            else if(id.substr(0,2) == 'Com') {
+                return db.get('comunidades').find({name: id}).value()
+            }
+            else {
+                try {
+                    return db.get('miembros').find({name: id}).value()
+                }
+                catch {
+                    console.error(id, " no es un miembro");
+                }
+
+                try {
+                    return db.get('gestores').find({name: id}).value()
+                }
+                catch {
+                    console.error(id, " no es un gestor");
+                }
+            }
+        }
+    }
+}*/
+
 var m = db.get('miembros').size().value()
 console.log(m)
 
 module.exports.insertDB = insertDB;
 module.exports.updateDB = updateDB;
 module.exports.deleteXfromDB = deleteXfromDB;
+//module.exports.getFromDB = getFromDB;
