@@ -24,32 +24,28 @@
         <input type="submit">
     </form>
 
-    <h2>Lista de miembros. Total: <%= n_miembros%></h2>
+    <h2>Lista de miembros. Total: <%= n_miembros %></h2>
 
     <table>
-        <tr>
-            <td><strong>Curso</strong></td>
-            <td><strong>Horas</strong></td>
-            <td><strong>Horario</strong></td>
-        </tr>
 
         <tr>
-            <td>CSS</td>
-            <td>10</td>
-            <td>16:00 - 20:00</td>
+            <td><strong>DNI</strong></td>
+            <td><strong>Nombre</strong></td>
+            <td><strong>Apellido</strong></td>
+            <td><strong>DER</strong></td>
+            <td><strong>Comunidad</strong></td>
         </tr>
-        
-        <tr>
-            <td>HTML</td>
-            <td>20</td>
-            <td>16:00 - 20:00</td>
-        </tr>
-        
-        <tr>
-            <td>Dreamweaver</td>
-            <td>60</td>
-            <td>16:00 - 20:00</td>
-        </tr>
+
+        <% for (let i = 0; i < n_miembros; i++) { %>
+            <tr>
+                <td><%= miembros[i].dni %></td>
+                <td><%= miembros[i].name %></td>
+                <td><%= miembros[i].last_name %></td>
+                <td><%= miembros[i].DER_name %></td>
+                <td><%= miembros[i].community_name %></td>
+            </tr>
+        <% } %>
+
     </table>
 
 </body>

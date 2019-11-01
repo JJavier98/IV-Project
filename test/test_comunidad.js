@@ -10,9 +10,9 @@ describe('Clase Comunidad', function() {
     // Define Gestor
     var g1 = new Gestor('12345678-J', 'Pepe', 'López', d, undefined)
     // Define Comunidad
-    var c = new Comunidad('Com #1', 'Comunidad de paneles solares', 100, 350, g1)
+    var c = new Comunidad('Com #1', 'Comunidad de paneles solares', 100, 350, g1.dni)
     // Define Comunidad
-    var c2 = new Comunidad('Com #2', 'Comunidad de paneles solares', 100, 350, g1)
+    var c2 = new Comunidad('Com #2', 'Comunidad de paneles solares', 100, 350, g1.dni)
     // Define Miembro
     var m1 = new Miembro('12345678-J', 'Pepe', 'López', d, c)
 

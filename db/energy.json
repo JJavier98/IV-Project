@@ -1,0 +1,104 @@
+{
+  "miembros": [
+    {
+      "dni": "77",
+      "name": "7",
+      "last_name": "'Apellido no aportado'",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "77766199W",
+      "name": "Jota",
+      "last_name": "Alonso",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "02848897W",
+      "name": "PPlu",
+      "last_name": "Alon",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "88",
+      "name": "8",
+      "last_name": "'Apellido no aportado'",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "9999",
+      "name": "99",
+      "last_name": "hola",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "44",
+      "name": "4",
+      "last_name": "4",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    },
+    {
+      "dni": "5555",
+      "name": "5",
+      "last_name": "5",
+      "DER_name": "DER #1",
+      "community_name": "Com #1",
+      "gestor": false
+    }
+  ],
+  "gestores": [
+    {
+      "dni": "00000000-Y",
+      "name": "Paco",
+      "last_name": "Pérez",
+      "community_name": "Com #1",
+      "gestor": true
+    }
+  ],
+  "comunidades": [
+    {
+      "name": "Com #1",
+      "desc": "Descripción",
+      "latitud": 90,
+      "longitud": 85,
+      "gestor_dni": "00000000-Y",
+      "miembros": {
+        "44": {
+          "dni": "44",
+          "name": "4",
+          "last_name": "4",
+          "DER_name": "DER #1",
+          "community_name": "Com #1",
+          "gestor": false
+        },
+        "77": {
+          "dni": "77",
+          "name": "7",
+          "last_name": "7",
+          "DER_name": "DER #1",
+          "community_name": "Com #1",
+          "gestor": false
+        }
+      }
+    }
+  ],
+  "der": [
+    {
+      "name": "DER #1",
+      "latitud": 90,
+      "longitud": 85,
+      "type": "instalación fotovoltaica"
+    }
+  ]
+}
