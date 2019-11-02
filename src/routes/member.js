@@ -1,47 +1,60 @@
-// Bibliotecas
-const { Router }  = require('express');
-const router      = Router();
-const Miembro     = require('../miembro.js');
-const bodyParser  = require('body-parser');
-const low         = require('lowdb')
-const FileSync    = require('lowdb/adapters/FileSync');
-const dbFunc      = require('../functions.js');
-const db          = low(new FileSync('db/energy.json'));
-db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
-//.write();
+module.exports = (app) => {
+    // Bibliotecas
+    const Miembro     = require('../miembro.js');
+    const bodyParser  = require('body-parser');
+    const low         = require('lowdb')
+    const FileSync    = require('lowdb/adapters/FileSync');
+    const dbFunc      = require('../functions.js');
+    const db          = low(new FileSync('db/energy.json'));
 
-var urlencodedParser = bodyParser.urlencoded({extended:true})
+    var urlencodedParser = bodyParser.urlencoded({extended:true})
+    app.locals.miembros = db.get('miembros').value()
 
-// Routes
-router.get('/', (req, res) => {
-    res.render(__dirname+'/views/members.ejs', {
-        title: 'Miembros',
-        n_miembros: db.get('miembros').size().value(),
-        miembros: db.get('miembros').value()
-    })
-});
+    app.get('/member', (req, res) => {
+        res.render(__dirname+'/../views/members.ejs', {
+        title: 'Miembros'
+        })
+    });
+    
+    app.get('/api/member', (req, res) => {
+        res.send(app.locals.miembros)
+    });
 
-router.post('/', urlencodedParser, (req, res) => {
-    var data = req.body;
-    var apellido;
-    var dni = (data.DNI).toString() + (data.LetraDNI).toUpperCase();
+    app.post('/member', urlencodedParser, (req, res) => {
+        var data = req.body;
+        var apellido;
+        var dni = (data.DNI).toString() + (data.LetraDNI).toUpperCase();
 
-    if (data.Apellido == '') {
-        apellido = undefined;
-    }
-    else {
-        apellido = data.Apellido;
-    }
-    var nuevo_miembro = new Miembro(dni, data.nombre, apellido, data.DER, data.Comunidad);
-    dbFunc.insertDB(nuevo_miembro);
-    console.log('n miembros')
-    console.log(db.get('miembros').size().value())
-    res.render(__dirname+'/views/members.ejs', {
-        title: 'Miembros',
-        n_miembros: db.get('miembros').size().value(),
-        miembros: db.get('miembros').value()
-    })
-});
+        if (data.Apellido == '') {
+            apellido = undefined;
+        }
+        else {
+            apellido = data.Apellido;
+        }
 
-// Export
-module.exports = router;
+        var nuevo_miembro = new Miembro(dni, data.nombre, apellido, data.DER, data.Comunidad);
+        dbFunc.insertDB(nuevo_miembro);
+        app.locals.miembros.push(nuevo_miembro);
+
+        res.redirect('/member');
+    });
+
+    app.post('/api/member/:dni/:nombre/:apellido/:der/:comunidad', (req, res) => {
+        var parametros = req.params;
+        var apellido = 'Apellido no aportado'
+
+        if (parametros.apellido != 'null') {
+            apellido = parametros.apellido
+        }
+        var nuevo_miembro = new Miembro(parametros.dni, parametros.nombre, apellido, parametros.der, parametros.comunidad);
+        try{
+            dbFunc.insertDB(nuevo_miembro);
+        }
+        catch(error) {
+            console.error(error)
+        }
+        app.locals.miembros.push(nuevo_miembro);
+
+        res.send(nuevo_miembro);
+    });
+}

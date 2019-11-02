@@ -54,14 +54,12 @@ function insertDB(object) {
                 var com = db.get('comunidades').find({name: object.community_name}).value();
                 var nuevos_miembros = com.miembros;
                 nuevos_miembros[object.dni] = object;
-                console.log(com.gestor_dni)
                 var miembros_set = new Set();
                 for(var exKey in nuevos_miembros) {
                     miembros_set.add(nuevos_miembros[exKey]);
                 }                
                 //nuevos_miembros.add(object);
                 var nueva_com = new Comunidad(com.name, com.desc, com.latitud, com.longitud, com.gestor_dni, nuevos_miembros);
-                console.log(nueva_com)
                 updateDB(nueva_com);
             }
             else {
@@ -217,9 +215,6 @@ function updateDB(object) {
         object.latitud != undefined &&
         object.longitud != undefined)
         {
-            console.log('hola')
-            console.log(object)
-
             db.get('comunidades')
             .assign({name: object.name,
                 desc: object.desc,

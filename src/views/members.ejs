@@ -14,7 +14,7 @@
 
     <h2>Inscripción de miembros</h2>
     Los campos marcados con * son obligatorios. <br> <br>
-    <form action="/api/member" method="post">
+    <form action="/member" method="post">
         <input required type="number" name="DNI" placeholder="* DNI sin letra">
         <input required type="text" name="LetraDNI" placeholder="* Letra DNI">
         <input required type="text" name="nombre" placeholder="* Nombre del miembro">
@@ -24,8 +24,7 @@
         <input type="submit">
     </form>
 
-    <h2>Lista de miembros. Total: <%= n_miembros %></h2>
-
+    <h2>Número de miembros actuales: <%= miembros.length %></h2>
     <table>
 
         <tr>
@@ -36,7 +35,7 @@
             <td><strong>Comunidad</strong></td>
         </tr>
 
-        <% for (let i = 0; i < n_miembros; i++) { %>
+        <% for (let i = 0; i < miembros.length; i++) { %>
             <tr>
                 <td><%= miembros[i].dni %></td>
                 <td><%= miembros[i].name %></td>

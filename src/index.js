@@ -12,7 +12,7 @@ const Miembro     = require('./miembro.js');
 const Gestor      = require('./gestor.js');
 const Comunidad   = require('./comunidad.js');
 const DER         = require('./DER.js');
-const app = express();
+const app         = express();
 
 // Settings
 app.set('appName', 'Gestión Comunidades Energéticas');  // Nombre de la aplicación
@@ -29,7 +29,7 @@ app.use(express.json());                        // Trabajar con archivos JSON
 // Rutas
 app.use(require('./routes/index'));
 app.use('/api/community', require('./routes/community'));
-app.use('/api/member', require('./routes/member'));
+require('./routes/member')(app);
 
 // Iniciando servidor
 app.listen(app.get('port'), () => {
