@@ -172,16 +172,10 @@ module.exports = (app) => {
         res.status(resultado[1]).send(respuesta);
     });
 
-    app.put('/', (req, res) => {
-            const errors = validationResult(req);
-
-            if(!errors.isEmpty())
-            {
-                return res.status(422).json(errors.array());
-            }
-            else
-            {
-                res.send('received');
-            }
+    app.post('/api/community/:name/add-member/:dni', (req, res) => {
+        var comunidad = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
+        var miembro = dbFunc.db.get('miembros').find({dni: req.params.dni}).value();
+        var nuevos_miembros = comunidad.miembros;
+        console.log(nuevos_miembros);
     });
 }
