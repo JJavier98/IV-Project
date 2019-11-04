@@ -7,20 +7,10 @@ const Comunidad   = require('../src/comunidad');
 const DER         = require('../src/DER');
 const fs          = require('fs');
 
-/**
- * Creamos el archivo que actuará como base de datos
- * @const {low}
- */
 const db = low(new FileSync('db/energy.json'));
 
-/**
- * Definimos una estructura básica para la db
- * @param miembros Almacena todos los miembros
- * @param gestores Almacena todos los gestores
- * @param comunidades Almacena las comunidades controladas por el sistema
- * @param der Almacena los dispositivos DER de todas las comunidades del sistema
- */ 
-db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
+let def = JSON.parse(fs.readFileSync('./db/default.json'))
+db.defaults(def)
 .write();
 
 /**
@@ -28,7 +18,7 @@ db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
  * si todavía no pertenece a ella
  * @function insertDB
  * @param {Miembro | Gestor | Comunidad | DER} object Nueva instancia a agregar a la DB
- * @returns {void}
+ * @returns {{error, status, response}} Array de tres elementos. El primero indica si hubo algún error o no. El segundo es el estado HTTP. Y el tercero es la respuesta recivida.
  */
 function insertDB(object) {
     // Si el objeto es un Miembro
@@ -54,24 +44,25 @@ function insertDB(object) {
                 var com = db.get('comunidades').find({name: object.community_name}).value();
                 var nuevos_miembros = com.miembros;
                 nuevos_miembros[object.dni] = object;
-                var miembros_set = new Set();
-                for(var exKey in nuevos_miembros) {
-                    miembros_set.add(nuevos_miembros[exKey]);
-                }                
-                //nuevos_miembros.add(object);
                 var nueva_com = new Comunidad(com.name, com.desc, com.latitud, com.longitud, com.gestor_dni, nuevos_miembros);
+                console.log(nueva_com)
                 updateDB(nueva_com);
+
+                return [false, 201, object];
             }
             else {
                 console.error('No existe un DER o una comunidad con esos nombres');
+                return [true, 404, 'ERROR. DER o Comunidad no existen en la base de datos.'];
             }
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('miembros').find({dni: object.dni}).value() != undefined) {
             console.error('Ya existe un miembro con esa clave.\n Para modificarla use \'updateDB()\'');
+            return [true, 409, 'ERROR. Ya existe un miembro con esa clave.'];
         }
         else {
             console.error('Algunos atributos de miembro no contienen valores válidos');
+            return [true, 400, 'ERROR. Algunos atributos de miembro no contienen valores válidos'];
         }
     }
     // Si el objeto es un Gestor
@@ -118,14 +109,22 @@ function insertDB(object) {
                     gestor_dni: object.gestor_dni,
                     miembros: object.miembros})
                 .write()
+
+                return [false, 201, object];
+            }
+            else {
+                console.error('ERROR. No existe ningún gestor con ese DNI');
+                return [true, 404, 'ERROR. No existe ningún gestor con ese DNI'];
             }
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
             console.error('Ya existe una comunidad con esa clave.\n Para modificarla use \'updateDB()\'');
+            return [true, 400, 'ERROR. Ya existe una comunidad con esa clave.'];
         }
         else {
             console.error('Algunos atributos de la comunidad no contienen valores válidos');
+            return [true, 400, 'ERROR. Algunos atributos de comunidad no contienen valores válidos'];
         }
     }
     // Si el objeto es un DER
@@ -215,6 +214,7 @@ function updateDB(object) {
         object.latitud != undefined &&
         object.longitud != undefined)
         {
+            console.log(object)
             db.get('comunidades')
             .assign({name: object.name,
                 desc: object.desc,
@@ -222,14 +222,14 @@ function updateDB(object) {
                 longitud: object.longitud,
                 gestor_dni: object.gestor_dni,
                 miembros: object.miembros})
-            .value()
+            .write()
         }
         // Si no existe un objeto con la misma clave
         else if (db.get('comunidades').find({name: object.name}).value() == undefined) {
             console.error('NO existe una instancia con esa clave.');
         }
         else {
-            console.error('Algunos atributos no contienen valores válidos');
+            console.error('Algunos atributos no contienen valores válidos 444');
         }
     }
     else if (object instanceof DER) {
@@ -250,7 +250,7 @@ function updateDB(object) {
             console.error('NO existe una instancia con esa clave.');
         }
         else {
-            console.error('Algunos atributos no contienen valores válidos');
+            console.error('Algunos atributos no contienen valores válidos 555');
         }
     }
 }
@@ -336,46 +336,10 @@ function deleteXfromDB(object) {
     }
 }
 
-/**
- * Obtiene un objeto de la base de datos
- * @function getFromDB
- * @param {String} id Identificador que referencia a un objeto de la DB
- * @returns {Miembro | Gestor | Comunidad | DER}
- *//*
-function getFromDB(id) {
-    // Es comunidad o DER
-    if (id instanceof String) {
-        if (id.length > 3)
-        {
-            if(id.substr(0,2) == 'DER') {
-                return db.get('der').find({name: id}).value()
-            }
-            else if(id.substr(0,2) == 'Com') {
-                return db.get('comunidades').find({name: id}).value()
-            }
-            else {
-                try {
-                    return db.get('miembros').find({name: id}).value()
-                }
-                catch {
-                    console.error(id, " no es un miembro");
-                }
-
-                try {
-                    return db.get('gestores').find({name: id}).value()
-                }
-                catch {
-                    console.error(id, " no es un gestor");
-                }
-            }
-        }
-    }
-}*/
-
-var m = db.get('miembros').size().value()
-console.log(m)
+//var m = db.get('miembros').size().value()
+//console.log(m)
 
 module.exports.insertDB = insertDB;
 module.exports.updateDB = updateDB;
 module.exports.deleteXfromDB = deleteXfromDB;
-//module.exports.getFromDB = getFromDB;
+module.exports.db = db;

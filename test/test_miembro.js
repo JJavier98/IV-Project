@@ -5,21 +5,21 @@ var assert = require('assert');
 
 describe('Clase Miembro', function() {
     // Define DER
-    var d = new DER('DER #1', 200, 300, undefined)
+    var d = new DER('DER_1', 200, 300, undefined)
     // Define Comunidad
-    var c = new Comunidad('Com #1', 'Comunidad de paneles solares', 100, 350, undefined)
+    var c = new Comunidad('Com_1', 'Comunidad de paneles solares', 100, 350, undefined)
     // Define Miembro
-    var m1 = new Miembro('12345678-J', 'Pepe', 'López', d.name, c.name)
+    var m1 = new Miembro('12345678J', 'Pepe', 'López', d.name, c.name)
     // Define Miembro
-    var m1_ = new Miembro('12345678-J', 'Pepe', 'López', d.name, c.name)
+    var m1_ = new Miembro('12345678J', 'Pepe', 'López', d.name, c.name)
     // Define Miembro sin apellido
-    var m2 = new Miembro('12345678-J', 'Pepe', undefined, d.name, c.name)
+    var m2 = new Miembro('12345678J', 'Pepe', undefined, d.name, c.name)
     // Define Miembro sin apellido, sin DER y sin comunidad
-    var m3 = new Miembro('12345678-J', 'Pepe', undefined, undefined, undefined)
+    var m3 = new Miembro('12345678J', 'Pepe', undefined, undefined, undefined)
 
 
     it('should assign correct value to dni attribute', function() {
-        assert.equal(m1.dni, '12345678-J')
+        assert.equal(m1.dni, '12345678J')
     });
     
     it('should assign correct value to name attribute', function() {
@@ -35,11 +35,11 @@ describe('Clase Miembro', function() {
     });
     
     it('should assign correct value to DER_name attribute', function() {
-        assert.equal(m1.DER_name, 'DER #1')
+        assert.equal(m1.DER_name, 'DER_1')
     });
     
     it('should assign correct value to Community_name attribute', function() {
-        assert.equal(m1.community_name, 'Com #1')
+        assert.equal(m1.community_name, 'Com_1')
     });
     
     it('should assign correct value to undefined DER_name attribute', function() {
@@ -57,7 +57,7 @@ describe('Clase Miembro', function() {
     describe('Métodos de Miembro', function(){
 
         // Define Miembro sin apellido, DER ni comunidad
-        var m4 = new Miembro('12345678-J', 'Pepe', undefined, undefined, undefined)
+        var m4 = new Miembro('12345678J', 'Pepe', undefined, undefined, undefined)
         
         m4.asignarCommunityName(c)
         it('should assign c.name to m4.community_name', function() {

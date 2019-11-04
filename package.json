@@ -2,11 +2,15 @@
   "name": "energy_manager",
   "version": "1.0.0",
   "description": "API REST para ayudar a gestores de comunidades energéticas a llevar a cabo su trabajo. Crea, actualiza y borra comunidades energéticas con una serie de restricciones.",
+  "template": {
+    "forceLanguage": "es"
+  },
   "main": "index.js",
   "scripts": {
     "test": "mocha test/*.js",
     "dev": "nodemon src/index.js",
-    "doc": "jsdoc src/*.js ./main_page.md -d ./docs"
+    "doc": "jsdoc src/*.js ./docs/main_page.md -d ./docs/ECM",
+    "swagger": "swagger project edit"
   },
   "repository": {
     "type": "git",
@@ -30,6 +34,7 @@
   "homepage": "https://github.com/JJavier98/IV-Project#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
@@ -40,7 +45,14 @@
     "querystring": "^0.2.0"
   },
   "devDependencies": {
+    "apidoc": "^0.17.7",
     "jsdoc": "^3.6.3",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "swagger": "^0.7.5",
+    "swagger-editor": "^3.6.37",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-jsdoc-express": "^2.4.0",
+    "swagger-ui": "^3.24.0",
+    "swagger-ui-express": "^4.1.2"
   }
 }

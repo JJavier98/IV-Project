@@ -5,13 +5,13 @@ var assert = require('assert');
 
 describe('Clase Gestor', function() {
     // Define DER
-    var d = new DER('DER #1', 200, 300, undefined)
+    var d = new DER('DER_1', 200, 300, undefined)
     // Define Comunidad
-    var c = new Comunidad('Com #1', 'Comunidad de paneles solares', 100, 350, undefined)
+    var c = new Comunidad('Com_1', 'Comunidad de paneles solares', 100, 350, undefined)
     // Define Gestor
-    var g1 = new Gestor('12345678-J', 'Pepe', 'López', d, c)
+    var g1 = new Gestor('12345678J', 'Pepe', 'López', d, c)
     // Define Gestor sin apellido
-    var g2 = new Gestor('12345678-J', 'Pepe', undefined, undefined, c)
+    var g2 = new Gestor('12345678J', 'Pepe', undefined, undefined, c)
 
     it('should assign correct value to DER_name attribute giving a DER object', function() {
         assert.equal(g1.DER_name, undefined)

@@ -11,18 +11,18 @@ var assert        = require('assert');
 // Testeo de las funciones para trabajar con los archivos JSON
 describe('Funciones DB', function() {
     // Creamos la db
-    const db = low(new FileSync('db/energy.json'));
+    const db = low(new FileSync(__dirname + '/../db/energy.json'));
     // Definimos una estructura por defecto
     db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
     .write();
 
     // Declaración de datos para probar las funciones
-    var miembro = new Miembro('00000000-X', 'Pepe', 'López');
-    var miembro1 = new Miembro('00000000-X', 'Pepo', 'García');
-    var miembro2 = new Miembro('11111111-Y', 'Juan', 'López');
-    var gestor = new Gestor('00000000-Y', 'Paco', 'Pérez');
-    var comunidad = new Comunidad('Com #1', 'Descripción', 90, 85, gestor);
-    var der = new DER('DER #1', 90, 85);
+    var miembro = new Miembro('00000000X', 'Pepe', 'López');
+    var miembro1 = new Miembro('00000000X', 'Pepo', 'García');
+    var miembro2 = new Miembro('11111111Y', 'Juan', 'López');
+    var gestor = new Gestor('00000000Y', 'Paco', 'Pérez');
+    var comunidad = new Comunidad('Com_1', 'Descripción', 90, 85, gestor);
+    var der = new DER('DER_1', 90, 85);
     // Compleción de los datos
     gestor.asignarCommunityName(comunidad);
     miembro.asignarCommunityName(comunidad);

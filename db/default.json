@@ -65,14 +65,6 @@
       "longitud": 85,
       "gestor_dni": "00000000X",
       "miembros": {}
-    },
-    {
-      "name": "Com_3",
-      "desc": "com3",
-      "latitud": "56",
-      "longitud": "54",
-      "gestor_dni": "00000000Y",
-      "miembros": {}
     }
   ],
   "der": [

@@ -14,15 +14,27 @@
 
     <h2>Inscripción de miembros</h2>
     Los campos marcados con * son obligatorios. <br> <br>
-    <form action="/member" method="post">
-        <input required type="number" name="DNI" placeholder="* DNI sin letra">
-        <input required type="text" name="LetraDNI" placeholder="* Letra DNI">
+    <form action="/member" method="post" id="miembros">
+        <input required type="number" name="DNI" placeholder="* DNI sin letra" minlength="3" maxlength="8">
+        <input required type="text" name="LetraDNI" placeholder="* Letra DNI" maxlength="1" minlength="1">
         <input required type="text" name="nombre" placeholder="* Nombre del miembro">
         <input type="text" name="Apellido" placeholder="Apellido">
-        <input required type="text" name="DER" placeholder="* DER">
-        <input required type="text" name="Comunidad" placeholder="* Comunidad">
+        <!--<input required type="text" name="DER" placeholder="* DER">-->
+        <!--<input required type="text" name="Comunidad" placeholder="* Comunidad">-->
         <input type="submit">
     </form>
+
+    <select name="DER" form="miembros" required>
+        <% for (let i = 0; i < ders.length; i++) { %>
+                <option value= <%= ders[i].name %> ><%= ders[i].name %></option>
+        <% } %>
+    </select>
+
+    <select name="Comunidad" form="miembros" required>
+        <% for (let i = 0; i < comunidades.length; i++) { %>
+                <option value= <%= comunidades[i].name %> ><%= comunidades[i].name %></option>
+        <% } %>
+    </select>
 
     <h2>Número de miembros actuales: <%= miembros.length %></h2>
     <table>

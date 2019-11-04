@@ -3,11 +3,11 @@ var assert = require('assert');
 
 describe('Clase DER', function() {
     // Define DER
-    var d = new DER('DER #1', 200, 300, undefined)
-    var d1 = new DER('DER #1', 200, 300, 'cargador coche eléctrico')
+    var d = new DER('DER_1', 200, 300, undefined)
+    var d1 = new DER('DER_1', 200, 300, 'cargador coche eléctrico')
 
     it('should assign correct value to name attribute', function() {
-        assert.equal(d.name, 'DER #1')
+        assert.equal(d.name, 'DER_1')
     });
     
     it('should assign correct value to lalitud attribute', function() {

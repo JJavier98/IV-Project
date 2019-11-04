@@ -1,0 +1,12 @@
+{
+    "swaggerDefinition": {
+        "info": {
+            "openapi": "3.0.0",
+            "version": "1.0.0",
+            "title": "Energetic Comunities Manager API",
+            "description": "Se trata de un microservicio dirigido a los gestores de comunidades energéticas en el cual se podrán añadir nuevos miembros a las distintas comunidades así como crear nuevas comunidades y eliminar las ya creadas.",
+            "servers": ["http://localhost:8888"]
+        }
+    },
+    "apis": ["./src/routes/*.js", "./src/index.js"]
+}

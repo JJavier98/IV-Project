@@ -6,19 +6,19 @@ var assert = require('assert');
 
 describe('Clase Comunidad', function() {
     // Define DER
-    var d = new DER('DER #1', 200, 300, undefined)
+    var d = new DER('DER_1', 200, 300, undefined)
     // Define Gestor
-    var g1 = new Gestor('12345678-J', 'Pepe', 'López', d, undefined)
+    var g1 = new Gestor('12345678J', 'Pepe', 'López', d, undefined)
     // Define Comunidad
-    var c = new Comunidad('Com #1', 'Comunidad de paneles solares', 100, 350, g1.dni)
+    var c = new Comunidad('Com_1', 'Comunidad de paneles solares', 100, 350, g1.dni)
     // Define Comunidad
-    var c2 = new Comunidad('Com #2', 'Comunidad de paneles solares', 100, 350, g1.dni)
+    var c2 = new Comunidad('Com_2', 'Comunidad de paneles solares', 100, 350, g1.dni)
     // Define Miembro
-    var m1 = new Miembro('12345678-J', 'Pepe', 'López', d, c)
+    var m1 = new Miembro('12345678J', 'Pepe', 'López', d, c)
 
 
     it('should assign correct value to name attribute', function() {
-        assert.equal(c.name, 'Com #1')
+        assert.equal(c.name, 'Com_1')
     });
     
     it('should assign correct value to desc attribute', function() {

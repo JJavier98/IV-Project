@@ -33,11 +33,10 @@ const Miembro     = require('../src/miembro');
 const Gestor      = require('../src/gestor');
 const Comunidad   = require('../src/comunidad');
 const DER         = require('../src/DER');
-const fs          = require('fs');
 
 /**
  * Creamos el archivo que actuará como base de datos
- * @const {low}
+ * @const {lowdb}
  */
 const db = low(new FileSync('db/energy.json'));
 
@@ -56,7 +55,7 @@ db.defaults({miembros: [], gestores: [], comunidades: [], der: []})
  * si todavía no pertenece a ella
  * @function insertDB
  * @param {Miembro | Gestor | Comunidad | DER} object Nueva instancia a agregar a la DB
- * @returns {void}
+ * @returns {{error, status, response}} Array de tres elementos. El primero indica si hubo algún error o no. El segundo es el estado HTTP. Y el tercero es la respuesta recivida.
  */
 function insertDB(object) {
     // Si el objeto es un Miembro
@@ -67,21 +66,44 @@ function insertDB(object) {
             object.community_name != undefined &amp;&amp;
             object.gestor == false)
         {
-            db.get('miembros')
-            .push({dni: object.dni,
-                name: object.name,
-                last_name: object.last_name,
-                DER_name: object.DER_name,
-                community_name: object.community_name,
-                gestor: object.gestor})
-            .write()
+            if (db.get('der').find({name: object.DER_name}).value() != undefined &amp;&amp;
+            db.get('comunidades').find({name: object.community_name}).value() != undefined )
+            {
+                db.get('miembros')
+                .push({dni: object.dni,
+                    name: object.name,
+                    last_name: object.last_name,
+                    DER_name: object.DER_name,
+                    community_name: object.community_name,
+                    gestor: object.gestor})
+                .write()
+
+                var com = db.get('comunidades').find({name: object.community_name}).value();
+                var nuevos_miembros = com.miembros;
+                nuevos_miembros[object.dni] = object;
+                var miembros_set = new Set();
+                for(var exKey in nuevos_miembros) {
+                    miembros_set.add(nuevos_miembros[exKey]);
+                }                
+                //nuevos_miembros.add(object);
+                var nueva_com = new Comunidad(com.name, com.desc, com.latitud, com.longitud, com.gestor_dni, nuevos_miembros);
+                updateDB(nueva_com);
+
+                return [false, 201, object];
+            }
+            else {
+                console.error('No existe un DER o una comunidad con esos nombres');
+                return [true, 404, 'ERROR. DER o Comunidad no existen en la base de datos.'];
+            }
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('miembros').find({dni: object.dni}).value() != undefined) {
             console.error('Ya existe un miembro con esa clave.\n Para modificarla use \'updateDB()\'');
+            return [true, 409, 'ERROR. Ya existe un miembro con esa clave.'];
         }
         else {
             console.error('Algunos atributos de miembro no contienen valores válidos');
+            return [true, 400, 'ERROR. Algunos atributos de miembro no contienen valores válidos'];
         }
     }
     // Si el objeto es un Gestor
@@ -114,16 +136,21 @@ function insertDB(object) {
         if (db.get('comunidades').find({name: object.name}).value() == undefined &amp;&amp;
             object.desc != undefined &amp;&amp;
             object.latitud != undefined &amp;&amp;
-            object.longitud != undefined)
+            object.longitud != undefined &amp;&amp;
+            object.gestor_dni != undefined &amp;&amp;
+            object.miembros != undefined)
         {
-            db.get('comunidades')
-            .push({name: object.name,
-                desc: object.desc,
-                latitud : object.latitud,
-                longitud: object.longitud,
-                gestor_dni: object.gestor_dni,
-                miembros: object.miembros})
-            .write()
+            if (db.get('gestores').find({dni: object.gestor_dni}).value() != undefined)
+            {
+                db.get('comunidades')
+                .push({name: object.name,
+                    desc: object.desc,
+                    latitud : object.latitud,
+                    longitud: object.longitud,
+                    gestor_dni: object.gestor_dni,
+                    miembros: object.miembros})
+                .write()
+            }
         }
         // Si ya existe un objeto con la misma clave
         else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
@@ -166,7 +193,9 @@ function insertDB(object) {
  * @returns {void}
  */
 function updateDB(object) {
-    if (object instanceof Miembro &amp;&amp; object.gestor == false) {
+    if (object instanceof Miembro &amp;&amp; object.gestor == false)
+    {
+
         if (db.get('miembros').find({dni: object.dni}).value() != undefined &amp;&amp;
         object.DER_name != undefined &amp;&amp;
         object.community_name != undefined &amp;&amp;
@@ -339,12 +368,13 @@ function deleteXfromDB(object) {
     }
 }
 
-var m = db.get('miembros').size().value()
-console.log(m)
+//var m = db.get('miembros').size().value()
+//console.log(m)
 
 module.exports.insertDB = insertDB;
 module.exports.updateDB = updateDB;
-module.exports.deleteXfromDB = deleteXfromDB;</code></pre>
+module.exports.deleteXfromDB = deleteXfromDB;
+module.exports.db = db;</code></pre>
         </article>
     </section>
 
@@ -360,7 +390,7 @@ module.exports.deleteXfromDB = deleteXfromDB;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Oct 30 2019 21:19:37 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sat Nov 02 2019 23:05:11 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
