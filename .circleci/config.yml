@@ -1,11 +1,5 @@
 version: 2.1
 
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - node-8.10.0
-      - node-latest
 orbs:
   win: circleci/windows@1.0.0
 
