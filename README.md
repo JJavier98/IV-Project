@@ -1,6 +1,7 @@
 # :zap: Gestión de comunidades energéticas
 
 [![Build Status](https://travis-ci.org/JJavier98/IV-Project.svg?branch=master)](https://travis-ci.org/JJavier98/IV-Project)
+[![CircleCI](https://circleci.com/gh/JJavier98/IV-Project.svg?style=svg)](https://circleci.com/gh/JJavier98/IV-Project)
 
 ## :books: Documentación
 Se muestran las distintas clases, métodos y funciones del proyecto. Además en la página principal ___HOME___ mostramos los comandos principales de la herramienta de construcción ***npm***.
