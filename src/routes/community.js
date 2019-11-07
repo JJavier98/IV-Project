@@ -10,8 +10,9 @@ module.exports = (app) => {
     app.locals.comunidades = dbFunc.db.get('comunidades').value();
 
     // Routes
+    /* DE MOMENTO QUEDA INUTILIZADO
     /**
-     * @swagger
+     * @ swagger
      * /community:
      *      get:
      *          description: Obtiene HTML que muestra las comunidades registradas y da
@@ -21,35 +22,63 @@ module.exports = (app) => {
      *          responses:
      *              '200':
      *                  description: Success. Muestra la página correctamente.  
-     */
+     *
     app.get('/community', (req, res) => {
         res.render(__dirname+'/../views/communities.ejs', {
             title: 'Comunidades'
         })
     });
+    */
     
     /**
      * @swagger
-     * /api/member:
+     * /api/communities:
      *  get:
-     *      description: Obtiene una lista con todos los miembros en formato JSON
-     *      summary: Obtiene todos los miembros
-     *      operationId: GETMembers
+     *      description: Obtiene una lista con todos las comunidades en formato JSON
+     *      summary: Obtiene todos las comunidades
+     *      operationId: GETCommunities
      *      responses:
      *          "200":
-     *              description: Success. Obtiene la lista de miembros de la base
+     *              description: Success. Obtiene la lista de comunidades de la base
      *                          de datos y la devuelve.
      *              schema:
      *                  type: object
      *                  properties:
      *                      error:
      *                          type: boolean
+     *                          example: false
      *                      codigo:
      *                          type: number
+     *                          example: 200
      *                      mensaje:
      *                          type: object
+     *                          example: {
+                                            "name": "Com_1",
+                                            "desc": "Comunidad número 1",
+                                            "latitud": 90,
+                                            "longitud": 85,
+                                            "gestor_dni": "00000000Y",
+                                            "miembros": {
+                                                "12345678W": {
+                                                "dni": "12345678W",
+                                                "name": "Pepe",
+                                                "last_name": "'Apellido no aportado'",
+                                                "DER_name": "DER_1",
+                                                "community_name": "Com_1",
+                                                "gestor": false
+                                                },
+                                                "00000000X": {
+                                                    "dni": "00000000X",
+                                                    "name": "Pepe",
+                                                    "last_name": "López",
+                                                    "DER_name": "DER_1",
+                                                    "community_name": "Com_1",
+                                                    "gestor": false
+                                                }
+                                            }
+                                        }
      */
-    app.get('/api/community', (req, res) => {
+    app.get('/api/communities', (req, res) => {
         var dato = app.locals.comunidades;
         respuesta = {
             error: false,
@@ -61,7 +90,7 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /api/community/name/{name}:
+     * /api/community/{name}:
      *  get:
      *      description: Obtiene la comunidad cuyo nombre corresponde con el pasado como parámetro.
      *      summary: Obtiene una comunidad en específico
@@ -71,6 +100,7 @@ module.exports = (app) => {
      *          name: name
      *          required: true
      *          type: string
+     *          example: Com_1
      *      responses:
      *          "200":
      *              description: Success. Obtiene el miembro de la base
@@ -80,15 +110,25 @@ module.exports = (app) => {
      *                  properties:
      *                      error:
      *                          type: boolean
+     *                          example: false
      *                      codigo:
      *                          type: number
+     *                          example: 200
      *                      mensaje:
      *                          type: object
+     *                          example: {
+                                    "name": "Com_2",
+                                    "desc": "Comunidad número 2",
+                                    "latitud": 100,
+                                    "longitud": 85,
+                                    "gestor_dni": "00000000X",
+                                    "miembros": {}
+                                }
      *          "404":
      *              description: Error. No existe ningún miembro con el DNI
      *                          especificado.
      */
-    app.get('/api/community/name/:name', (req, res, next) => {
+    app.get('/api/community/:name', (req, res, next) => {
         var dato = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
         respuesta = {
             error: false,
@@ -111,9 +151,10 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /api/community/{name}/{desc}/{latitud}/{longitud}/{gestor_dni}:
+     * /api/community/{name}:
      *  post:
-     *      description: Intenta crear una nueva comunidad con los parámetros introducidos comprobando que no hay conflictos con las ya existentes
+     *      description: Intenta crear una nueva comunidad con los parámetros introducidos
+     *                  comprobando que no hay conflictos con las ya existentes
      *      summary: Crea una nueva comunidad
      *      operationId: postCommunityURL
      *      parameters:
@@ -121,23 +162,36 @@ module.exports = (app) => {
      *          name: name
      *          required: true
      *          type: string
-     *        - in: path
-     *          name: desc
-     *          required: true
-     *          type: string
-     *        - in: path
-     *          name: latitud
-     *          required: true
-     *          type: number
-     *        - in: path
-     *          name: longitud
-     *          required: true
-     *          type: number
-     *        - in: path
-     *          name: gestor_dni
-     *          required: true
-     *          type: string
-     *          description: DNI del gestor a cargo de la comunidad. Debe existir en la DB.
+     *          example: Com_1
+     *        - in: body
+     *          name: comunidad
+     *          description: comunidad a crear
+     *          schema:
+     *              type: object
+     *              required:
+     *                  - desc
+     *                  - latitud
+     *                  - nombre
+     *                  - longitud
+     *                  - gestor_dni
+     *              properties:
+     *                  desc:
+     *                      type: string
+     *                      description: breve descripción de la comunidad
+     *                      example: Esta comunidad se dedica principalmente a la generación
+     *                              de energía eléctrica por medio de placas solares.
+     *                  latitud:
+     *                      type: float
+     *                      description: latitud geográfica a la que se encuentra la comunidad
+     *                      example: 50
+     *                  longitud:
+     *                      type: float
+     *                      description: longitud geográfica a la que se encuentra la comunidad
+     *                      example: 40
+     *                  gestor_dni:
+     *                      type: string
+     *                      description: DNI del gestor encargado de la comunidad
+     *                      example: 00000000X
      *      responses:
      *          "201":
      *              description: Success. Consigue crear la nueva comunidad
@@ -146,10 +200,20 @@ module.exports = (app) => {
      *                  properties:
      *                      error:
      *                          type: boolean
+     *                          example: false
      *                      codigo:
      *                          type: number
+     *                          example: 200
      *                      mensaje:
      *                          type: object
+     *                          example: {
+                                            "name": "Com_2",
+                                            "desc": "Comunidad número 2",
+                                            "latitud": 100,
+                                            "longitud": 85,
+                                            "gestor_dni": "00000000X",
+                                            "miembros": {}
+                                        }
      *          "404":
      *              description: Error. La comunidad o el DER asignado al miembro
      *                          no existen en la base de datos.
@@ -159,9 +223,10 @@ module.exports = (app) => {
      *          "400":
      *              description: Error. Algunos atributos de miembro no son válidos.
      */
-    app.post('/api/community/:name/:desc/:latitud/:longitud/:gestor_dni', (req, res) => {
-        var parametros = req.params;
-        var nueva_comunidad = new Comunidad(parametros.name, parametros.desc, parametros.latitud, parametros.longitud, parametros.gestor_dni);
+    app.post('/api/community/:name', (req, res) => {
+        var parametros = req.body;
+        var nueva_comunidad = new Comunidad(req.params.name, parametros.desc, parametros.latitud,
+            parametros.longitud, parametros.gestor_dni);
         var resultado = dbFunc.insertDB(nueva_comunidad);
         respuesta = {
             error: resultado[0],
@@ -172,10 +237,72 @@ module.exports = (app) => {
         res.status(resultado[1]).send(respuesta);
     });
 
+    /**
+     * @swagger
+     * /api/community/{name}/add-member/{dni}:
+     *  post:
+     *      description: Añade un miembro existente en la base de datos a una comunidad tambien 
+     *                      existente
+     *      summary: Añade un miembro a una comounidad
+     *      operationId: addMemberToCommunity
+     *      parameters:
+     *        - in: path
+     *          name: name
+     *          required: true
+     *          type: string
+     *          example: Com_1
+     *          description: nombre de la comunidad en la que se inserta el miembro
+     *        - in: path
+     *          name: dni
+     *          required: true
+     *          type: string
+     *          example: 12345678W
+     *          description: DNI del miembro a insertar
+     *      responses:
+     *          "201":
+     *              description: Success. El miembro se une a la comunidad
+     *              schema:
+     *                  type: object
+     *                  properties:
+     *                      error:
+     *                          type: boolean
+     *                          example: false
+     *                      codigo:
+     *                          type: number
+     *                          example: 200
+     *                      mensaje:
+     *                          type: object
+     *                          example: {
+                                            "name": "Com_1",
+                                            "desc": "Comunidad número 1",
+                                            "latitud": 90,
+                                            "longitud": 85,
+                                            "gestor_dni": "00000000Y",
+                                            "miembros": {
+                                                "12345678W": {
+                                                "dni": "12345678W",
+                                                "name": "Pepe",
+                                                "last_name": "'Apellido no aportado'",
+                                                "DER_name": "DER_1",
+                                                "community_name": "Com_1",
+                                                "gestor": false
+                                                }
+                                            }
+                                        }
+     *          "404":
+     *              description: Error. La comunidad o el miembro no existen en la base de datos.
+     */
     app.post('/api/community/:name/add-member/:dni', (req, res) => {
         var comunidad = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
         var miembro = dbFunc.db.get('miembros').find({dni: req.params.dni}).value();
         var nuevos_miembros = comunidad.miembros;
-        console.log(nuevos_miembros);
+        nuevos_miembros[miembro.dni] = miembro;
+
+        var nueva_comunidad = new Comunidad(comunidad.name, comunidad.desc, comunidad.latitud,
+                                comunidad.longitud, comunidad.gestor_dni, nuevos_miembros);
+        
+        var resultado = dbFunc.updateDB(nueva_comunidad);
+
+        res.status(resultado[1]).send(resultado[2]);
     });
 }

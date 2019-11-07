@@ -27,8 +27,9 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.set('appName', 'Gestión Comunidades Energéticas');  // Nombre de la aplicación
 app.set('port', process.env.PORT || 8888);              // Usa el puerto proporcionado por la nube; si no 3000
 app.set('json spaces', 2);                              // Espaciado al printar JSONs
-app.set('views', __dirname+'/views');                 // Plantillas HTML
-app.set('view engine', 'ejs');                          // Plantilla HTML a usar
+// DE MOMENTO QUEDA INUTILIZADO
+// app.set('views', __dirname+'/views');                 // Plantillas HTML
+// app.set('view engine', 'ejs');                          // Plantilla HTML a usar
 
 // Middlewares
 app.use(morgan('dev'));                         // log de conexiones
