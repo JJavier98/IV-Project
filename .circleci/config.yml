@@ -13,7 +13,58 @@ orbs:
   win: circleci/windows@1.0.0
 
 jobs:
-  build:
+  node-10.16.3:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run:
+          name: "Install npm"
+          command: sudo npm install -g npm@latest
+      - run:
+          name: "Install project dependencies"
+          command: npm install
+      - run:
+          name: "Run tests"
+          command: npm run test
+  node-8.10:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run:
+          name: "Install project dependencies"
+          command: npm install
+      - run:
+          name: "Run tests"
+          command: npm run test
+  node-latest:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run:
+          name: "Install project dependencies"
+          command: npm install
+      - run:
+          name: "Run tests"
+          command: npm run test
+  node-8.10:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run:
+          name: "Install project dependencies"
+          command: npm install
+      - run:
+          name: "Run tests"
+          command: npm run test
+  node-lts:
     executor:
       name: win/vs2019
       shell: powershell.exe
