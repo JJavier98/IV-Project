@@ -45,7 +45,6 @@ function insertDB(object) {
                 var nuevos_miembros = com.miembros;
                 nuevos_miembros[object.dni] = object;
                 var nueva_com = new Comunidad(com.name, com.desc, com.latitud, com.longitud, com.gestor_dni, nuevos_miembros);
-                console.log(nueva_com)
                 updateDB(nueva_com);
 
                 return [false, 201, object];
@@ -310,13 +309,16 @@ function deleteXfromDB(object) {
             db.get('comunidades')
             .remove({name: object.name})
             .write()
+            return [false, 200, object];
         }
         // Si no existe un objeto con la misma clave
         else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
             console.error('NO existe una instancia con esa clave.');
+            return [true, 404, 'ERROR. NO existe una instancia con esa clave.'];
         }
         else {
             console.error('Algunos atributos no contienen valores válidos');
+            return [true, 400, 'ERROR. Valores inválidos.'];
         }
     }
     else if (object instanceof DER) {

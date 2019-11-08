@@ -240,7 +240,7 @@ module.exports = (app) => {
     /**
      * @swagger
      * /api/community/{name}/add-member/{dni}:
-     *  post:
+     *  put:
      *      description: Añade un miembro existente en la base de datos a una comunidad tambien 
      *                      existente
      *      summary: Añade un miembro a una comounidad
@@ -292,7 +292,7 @@ module.exports = (app) => {
      *          "404":
      *              description: Error. La comunidad o el miembro no existen en la base de datos.
      */
-    app.post('/api/community/:name/add-member/:dni', (req, res) => {
+    app.put('/api/community/:name/add-member/:dni', (req, res) => {
         var comunidad = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
         var miembro = dbFunc.db.get('miembros').find({dni: req.params.dni}).value();
         var nuevos_miembros = comunidad.miembros;
@@ -302,6 +302,36 @@ module.exports = (app) => {
                                 comunidad.longitud, comunidad.gestor_dni, nuevos_miembros);
         
         var resultado = dbFunc.updateDB(nueva_comunidad);
+
+        res.status(resultado[1]).send(resultado[2]);
+    });
+
+    /**
+     * @swagger
+     * /api/community/{name}:
+     *  delete:
+     *      description: Elimina una comunidad existente
+     *      summary: Elimina una comunidad existente
+     *      operationId: deleteCommunity
+     *      parameters:
+     *        - in: path
+     *          name: name
+     *          required: true
+     *          type: string
+     *          example: Com_1
+     *          description: nombre de la comunidad que se va a eliminar
+     *      responses:
+     *          "200":
+     *              description: Success. La comunidad se ha eliminado
+     *          "404":
+     *              description: Error. La comunidad no existe en la base de datos.
+     */
+    app.delete('/api/community/:name', (req, res) => {
+        var comunidad = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
+        var nueva_comunidad = new Comunidad(comunidad.name, comunidad.desc, comunidad.latitud,
+                                comunidad.longitud, comunidad.gestor_dni, comunidad.miembros);
+        
+        var resultado = dbFunc.deleteXfromDB(nueva_comunidad);
 
         res.status(resultado[1]).send(resultado[2]);
     });

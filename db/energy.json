@@ -9,33 +9,9 @@
       "gestor": false
     },
     {
-      "dni": "74764195W",
-      "name": "Paca",
-      "last_name": "García",
-      "DER_name": "DER_1",
-      "community_name": "Com_1",
-      "gestor": false
-    },
-    {
-      "dni": "74764196W",
-      "name": "Paca",
-      "last_name": "López",
-      "DER_name": "DER_1",
-      "community_name": "Com_1",
-      "gestor": false
-    },
-    {
       "dni": "87654321W",
       "name": " Pepe",
       "last_name": "López",
-      "DER_name": "DER_1",
-      "community_name": "Com_1",
-      "gestor": false
-    },
-    {
-      "dni": "987613685J",
-      "name": "Pepe",
-      "last_name": "'Apellido no aportado'",
       "DER_name": "DER_1",
       "community_name": "Com_1",
       "gestor": false
@@ -88,22 +64,6 @@
           "community_name": "Com_1",
           "gestor": false
         },
-        "74764195W": {
-          "dni": "74764195W",
-          "name": "Paca",
-          "last_name": "García",
-          "DER_name": "DER_1",
-          "community_name": "Com_1",
-          "gestor": false
-        },
-        "74764196W": {
-          "dni": "74764196W",
-          "name": "Paca",
-          "last_name": "López",
-          "DER_name": "DER_1",
-          "community_name": "Com_1",
-          "gestor": false
-        },
         "87654321W": {
           "dni": "87654321W",
           "name": " Pepe",
@@ -111,49 +71,8 @@
           "DER_name": "DER_1",
           "community_name": "Com_1",
           "gestor": false
-        },
-        "987613685J": {
-          "dni": "987613685J",
-          "name": "Pepe",
-          "last_name": "'Apellido no aportado'",
-          "DER_name": "DER_1",
-          "community_name": "Com_1",
-          "gestor": false
         }
       }
-    },
-    {
-      "name": "Com_2",
-      "desc": "Comunidad número 2",
-      "latitud": 100,
-      "longitud": 85,
-      "gestor_dni": "00000000X",
-      "miembros": {}
-    },
-    {
-      "name": "Com_3",
-      "desc": "com3",
-      "latitud": "56",
-      "longitud": "54",
-      "gestor_dni": "00000000Y",
-      "miembros": {
-        "74764195W": {
-          "dni": "74764195W",
-          "name": "Paca",
-          "last_name": "García",
-          "DER_name": "DER_1",
-          "community_name": "Com_1",
-          "gestor": false
-        }
-      }
-    },
-    {
-      "name": "Com_4",
-      "desc": "Esta comunidad se dedica principalmente a la generación de energía eléctrica por medio de placas solares.",
-      "latitud": 50,
-      "longitud": 40,
-      "gestor_dni": "00000000X",
-      "miembros": {}
     }
   ],
   "der": [

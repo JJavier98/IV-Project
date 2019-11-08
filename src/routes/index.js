@@ -1,3 +1,4 @@
+/*
 // Bibliotecas
 const { Router } = require('express');
 const router = Router();
@@ -12,3 +13,4 @@ router.get('/', (req, res) => {
 
 // Export
 module.exports = router;
+*/
