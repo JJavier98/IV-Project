@@ -18,4 +18,4 @@ jobs:
           command: npm install gulp -g
       - run:
           name: "Run tests"
-          command: npm run all-tests
+          command: gulp test

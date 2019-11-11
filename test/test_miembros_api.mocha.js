@@ -25,7 +25,7 @@ function execShellCommand(cmd) {
 execShellCommand('cat db/default.json > db/energy.json')
 
 describe('POST /api/member/dni', () => {
-    test('should insert a new member in the db', async () => {
+    it('should insert a new member in the db', async () => {
         await execShellCommand('cat db/default.json > db/energy.json')
 
         request.post('/api/member/456')
@@ -40,8 +40,7 @@ describe('POST /api/member/dni', () => {
 })
 
 describe('GET /api/members', () => {
-    test('should get all members of the db', async done => {
-        await execShellCommand('cat db/default.json > db/energy.json')
+    it('should get all members of the db', async done => {
 
         request.get('/api/members')
         .then( response => {
@@ -66,8 +65,7 @@ describe('GET /api/member/dni', () => {
                         }
                     };
 
-    test('should get a specific member of the db', async done => {
-        await execShellCommand('cat db/default.json > db/energy.json')
+    it('should get a specific member of the db', async done => {
 
         request.get('/api/member/12345678W')
         .then( response => {

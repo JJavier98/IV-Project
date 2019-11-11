@@ -1,7 +1,7 @@
 const app = require('../src/index')
 const supertest = require('supertest')
 const request = supertest(app.app)
-const encodings = require('./../node_modules/iconv-lite/encodings')
+const encodings = require('iconv-lite/encodings')
 
 var comunidad = {
     "desc": "Comunidad número 5",
@@ -24,7 +24,7 @@ function execShellCommand(cmd) {
 execShellCommand('cat db/default.json > db/energy.json')
 
 describe('POST /api/community/name', () => {
-    test('should insert a new community in the db', async () => {
+    it('should insert a new community in the db', async () => {
         execShellCommand('cat db/default.json > db/energy.json')
         .then(
         request.post('/api/community/Com_5')
@@ -39,7 +39,7 @@ describe('POST /api/community/name', () => {
 })
 
 describe('GET /api/communities', () => {
-    test('should get all communities of the db', async () => {
+    it('should get all communities of the db', async () => {
         execShellCommand('cat db/default.json > db/energy.json').then(
         request.get('/api/communities')
         .then( response => {
@@ -63,7 +63,7 @@ describe('GET /api/community/name', () => {
                           }
                     };
 
-    test('should get a specific community of the db', async done => {
+    it('should get a specific community of the db', async done => {
         execShellCommand('cat db/default.json > db/energy.json').then(
         request.get('/api/community/Com_4').then( response => {
             expect(response.statusCode).toBe(200);
@@ -76,7 +76,7 @@ describe('GET /api/community/name', () => {
 })
 
 describe('PUT /api/community/name/add-member/dni', () => {
-    test('should insert a new community in the db', async () => {
+    it('should insert a new community in the db', async () => {
         execShellCommand('cat db/default.json > db/energy.json').then(
         request.put('/api/community/Com_2/add-member/12345678W')
         .then( response => {
@@ -88,7 +88,7 @@ describe('PUT /api/community/name/add-member/dni', () => {
 })
 
 describe('DELETE /api/community/name', () => {
-    test('should delete a community of the db', async () => {
+    it('should delete a community of the db', async () => {
         execShellCommand('cat db/default.json > db/energy.json').then(
         request.delete('/api/community/Com_5')
         .then( response => {

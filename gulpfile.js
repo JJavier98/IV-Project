@@ -49,17 +49,9 @@ gulp.task('restart', function(cb) {
 })
 
 // Ejecuta los test de mocha
-gulp.task('mocha', () => (
+gulp.task('test', () => (
     gulp.src('test/*.mocha.js', {read: false}).pipe(mocha({reporter:'spec'}))
 ));
-
-// Ejecuta los test de jest
-gulp.task('jest', () => (
-    gulp.src('test/*.test.js', {read: false}).pipe(jest({reporter:'default'}))
-));
-
-// Ejecuta todos los test
-gulp.task('test', gulp.series('mocha', 'jest'));
 
 // Comprueba la cobertura de los test sobre el código
 gulp.task('coveralls', function(cb) {
