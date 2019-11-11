@@ -9,8 +9,9 @@ module.exports = (app) => {
     app.locals.ders = dbFunc.db.get('der').value()
     app.locals.comunidades = dbFunc.db.get('comunidades').value()
 
+    /* DE MOMENTO QUEDA INUTILIZADO
     /**
-     * @swagger
+     * @ swagger
      * /member:
      *      get:
      *          description: Obtiene HTML que muestra los miembros registrados y da
@@ -20,19 +21,21 @@ module.exports = (app) => {
      *          responses:
      *              '200':
      *                  description: Success. Muestra la página correctamente.  
-     */
+     *
+     * 
     app.get('/member', (req, res) => {
         res.render(__dirname+'/../views/members.ejs', {
             title: 'Miembros'
         })
     });
+    */
 
     /**
-     * @swagger
+     * @ swagger
      * /member:
      *      post:
-     *          description: Intenta crear un nuevo miembro con los datos introducidos
-     *                      en el formulario
+     *          description: Intenta crear un nuevo miembro con los datos introducidos en el 
+     *                          cuerpo del 'request'
      *          summary: Crea un nuevo miembro
      *          operationId: POSTMembersHTML
      *          parameters:
@@ -52,25 +55,31 @@ module.exports = (app) => {
      *                      DNI:
      *                          type: integer
      *                          description: número de dni sin letra
+     *                          example: 74764195
      *                      LetraDNI:
      *                          type: string
      *                          description: letra del dni
      *                          minimum: 1
      *                          maximum: 1
+     *                          example: W
      *                      nombre:
      *                          type: string
+     *                          example: Paco
      *                      Apellido:
      *                          type: string
      *                          description: Si aportamos como apellido 'null' o 'undefined' se
      *                              registrará el usuario sin el apellido
+     *                          example: García
      *                      DER:
      *                          type: string
      *                          description: Nombre del dispositivo energético que posee el miembro.
      *                              Debe existir en la base de datos.
+     *                          example: DER_1
      *                      Comunidad:
      *                          type: string
      *                          description: Nombre de la comunidad a la que pertenece el miembro.
      *                              Debe existir en la base de datos.
+     *                          example: Com_1
      *          responses:
      *              '200':
      *                  description: Success. Consigue crear el nuevo miembro
@@ -85,6 +94,8 @@ module.exports = (app) => {
      *              '400':
      *                  description: Error. Algunos atributos de miembro no son válidos.
      */
+
+    /* DE MOMENTO QUEDA INUTILIZADO
     app.post('/member', urlencodedParser, (req, res) => {
         var data = req.body;
         var apellido;
@@ -103,10 +114,11 @@ module.exports = (app) => {
 
         res.status(resultado[1]).redirect('/member');
     });
+    */
 
     /**
      * @swagger
-     * /api/member:
+     * /api/members:
      *  get:
      *      description: Obtiene una lista con todos los miembros en formato JSON
      *      summary: Obtiene todos los miembros
@@ -120,12 +132,24 @@ module.exports = (app) => {
      *                  properties:
      *                      error:
      *                          type: boolean
+     *                          example: false
      *                      codigo:
      *                          type: number
+     *                          example: 200
      *                      mensaje:
      *                          type: object
+     *                          example: [
+     *                                      {
+                                                "dni": "12345678W",
+                                                "name": "Pepe",
+                                                "last_name": "'Apellido no aportado'",
+                                                "DER_name": "DER_1",
+                                                "community_name": "Com_1",
+                                                "gestor": false
+                                            }
+                                        ]
      */
-    app.get('/api/member', (req, res) => {
+    app.get('/api/members', (req, res) => {
         var dato = app.locals.miembros;
         respuesta = {
             error: false,
@@ -148,6 +172,7 @@ module.exports = (app) => {
      *          name: dni
      *          required: true
      *          type: string
+     *          example: 12345678W
      *      responses:
      *          "200":
      *              description: Success. Obtiene el miembro de la base
@@ -157,10 +182,20 @@ module.exports = (app) => {
      *                  properties:
      *                      error:
      *                          type: boolean
+     *                          example: false
      *                      codigo:
      *                          type: number
+     *                          example: 200
      *                      mensaje:
      *                          type: object
+     *                          example: {
+                                            "dni": "12345678W",
+                                            "name": "Pepe",
+                                            "last_name": "'Apellido no aportado'",
+                                            "DER_name": "DER_1",
+                                            "community_name": "Com_1",
+                                            "gestor": false
+                                        }
      *          "404":
      *              description: Error. No existe ningún miembro con el DNI
      *                          especificado.
@@ -188,7 +223,7 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /api/member/{dni}/{nombre}/{apellido}/{der}/{comunidad}:
+     * /api/member/{dni}:
      *  post:
      *      description: Intenta crear un nuevo miembro con los parámetros introducidos
      *      summary: Crea un nuevo miembro
@@ -198,26 +233,40 @@ module.exports = (app) => {
      *          name: dni
      *          required: true
      *          type: string
-     *        - in: path
-     *          name: nombre
-     *          required: true
-     *          type: string
-     *        - in: path
-     *          name: apellido
-     *          required: true
-     *          type: string
-     *          description: Si aportamos como apellido "null" o "undefined" se
+     *          example: 87654321W
+     *        - in: body
+     *          name: miembro
+     *          description: Member to create
+     *          schema:
+     *              type: object
+     *              required:
+     *                  - nombre
+     *                  - apellido
+     *                  - der
+     *                  - comunidad
+     *              example: {
+                                "nombre": "Pepe",
+                                "apellido": "'Apellido no aportado'",
+                                "der": "DER_1",
+                                "comunidad": "Com_1"
+                            }
+     *          properties:
+     *              nombre:
+     *                  type: string
+     *                  example: Pepe
+     *              apellido:
+     *                  type: string
+     *                  description: Si aportamos como apellido "null" o "undefined" se
      *                      registrará el usuario sin el apellido
-     *        - in: path
-     *          name: der
-     *          required: true
-     *          type: string
-     *          description: Dispositivo energético que posee el miembro
-     *        - in: path
-     *          name: comunidad
-     *          required: true
-     *          type: string
-     *          description: Comunidad a la que pertenece el miembro
+     *                  example: López
+     *              der:
+     *                  type: string
+     *                  description: Dispositivo energético que posee el miembro
+     *                  example: DER_1
+     *              comunidad:
+     *                  type: string
+     *                  description: Comunidad a la que pertenece el miembro
+     *                  example: Com_1
      *      responses:
      *          "201":
      *              description: Success. Consigue crear el nuevo miembro
@@ -226,10 +275,20 @@ module.exports = (app) => {
      *                  properties:
      *                      error:
      *                          type: boolean
+     *                          example: false
      *                      codigo:
      *                          type: number
+     *                          example: 200
      *                      mensaje:
      *                          type: object
+     *                          example: {
+                                            "dni": "12345678W",
+                                            "name": "Pepe",
+                                            "last_name": "'Apellido no aportado'",
+                                            "DER_name": "DER_1",
+                                            "community_name": "Com_1",
+                                            "gestor": false
+                                        }
      *          "404":
      *              description: Error. La comunidad o el DER asignado al miembro
      *                          no existen en la base de datos.
@@ -246,7 +305,8 @@ module.exports = (app) => {
         if (parametros.apellido != 'null' && parametros.apellido != 'undefined') {
             apellido = parametros.apellido
         }
-        var nuevo_miembro = new Miembro(req.params.dni, parametros.nombre, apellido, parametros.der, parametros.comunidad);
+        var nuevo_miembro = new Miembro(req.params.dni, parametros.nombre, apellido,
+            parametros.der, parametros.comunidad);
         var resultado = dbFunc.insertDB(nuevo_miembro);
         respuesta = {
             error: resultado[0],

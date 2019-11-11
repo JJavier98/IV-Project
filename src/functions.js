@@ -213,7 +213,6 @@ function updateDB(object) {
         object.latitud != undefined &&
         object.longitud != undefined)
         {
-            console.log(object)
             db.get('comunidades')
             .assign({name: object.name,
                 desc: object.desc,
@@ -222,13 +221,17 @@ function updateDB(object) {
                 gestor_dni: object.gestor_dni,
                 miembros: object.miembros})
             .write()
+
+            return [false, 200, object];
         }
         // Si no existe un objeto con la misma clave
         else if (db.get('comunidades').find({name: object.name}).value() == undefined) {
             console.error('NO existe una instancia con esa clave.');
+            return [true, 404, 'ERROR. NO existe una instancia con esa clave.'];
         }
         else {
-            console.error('Algunos atributos no contienen valores válidos 444');
+            console.error('Algunos atributos no contienen valores válidos');
+            return [true, 404, 'ERROR. Algunos atributos no contienen valores válidos.'];
         }
     }
     else if (object instanceof DER) {
@@ -306,13 +309,16 @@ function deleteXfromDB(object) {
             db.get('comunidades')
             .remove({name: object.name})
             .write()
+            return [false, 200, object];
         }
         // Si no existe un objeto con la misma clave
         else if (db.get('comunidades').find({name: object.name}).value() != undefined) {
             console.error('NO existe una instancia con esa clave.');
+            return [true, 404, 'ERROR. NO existe una instancia con esa clave.'];
         }
         else {
             console.error('Algunos atributos no contienen valores válidos');
+            return [true, 400, 'ERROR. Valores inválidos.'];
         }
     }
     else if (object instanceof DER) {

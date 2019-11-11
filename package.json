@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*.js",
+    "test": "mocha test/*mocha.js",
     "dev": "nodemon src/index.js",
     "doc": "jsdoc src/*.js ./docs/main_page.md -d ./docs/ECM",
     "swagger": "swagger project edit"
@@ -46,8 +46,19 @@
   },
   "devDependencies": {
     "apidoc": "^0.17.7",
+    "coveralls": "^3.0.7",
+    "gulp": "^4.0.2",
+    "gulp-apidoc": "^0.2.8",
+    "gulp-apidoc-swagger": "^0.2.2",
+    "gulp-jest": "^4.0.3",
+    "gulp-mocha": "^7.0.2",
+    "gulp-swagger": "^1.0.1",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
     "jsdoc": "^3.6.3",
     "nodemon": "^1.19.3",
+    "pm2": "^4.1.2",
+    "supertest": "^4.0.2",
     "swagger": "^0.7.5",
     "swagger-editor": "^3.6.37",
     "swagger-jsdoc": "^3.4.0",

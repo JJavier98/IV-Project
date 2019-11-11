@@ -9,11 +9,11 @@
       "gestor": false
     },
     {
-      "dni": "1001W",
-      "name": " #2",
-      "last_name": "otra comunidad",
+      "dni": "456",
+      "name": "Pepe",
+      "last_name": "López",
       "DER_name": "DER_1",
-      "community_name": "Com_2",
+      "community_name": "Com_1",
       "gestor": false
     }
   ],
@@ -48,6 +48,14 @@
       "longitud": 85,
       "gestor_dni": "00000000Y",
       "miembros": {
+        "456": {
+          "dni": "456",
+          "name": "Pepe",
+          "last_name": "López",
+          "DER_name": "DER_1",
+          "community_name": "Com_1",
+          "gestor": false
+        },
         "12345678W": {
           "dni": "12345678W",
           "name": "Pepe",
@@ -72,23 +80,22 @@
       "latitud": 100,
       "longitud": 85,
       "gestor_dni": "00000000X",
-      "miembros": {
-        "1001W": {
-          "dni": "1001W",
-          "name": " #2",
-          "last_name": "otra comunidad",
-          "DER_name": "DER_1",
-          "community_name": "Com_2",
-          "gestor": false
-        }
-      }
+      "miembros": {}
     },
     {
       "name": "Com_3",
-      "desc": "com3",
-      "latitud": "56",
-      "longitud": "54",
-      "gestor_dni": "00000000Y",
+      "desc": "Comunidad número 3",
+      "latitud": 100,
+      "longitud": 85,
+      "gestor_dni": "00000000X",
+      "miembros": {}
+    },
+    {
+      "name": "Com_4",
+      "desc": "Comunidad número 4",
+      "latitud": 100,
+      "longitud": 85,
+      "gestor_dni": "00000000X",
       "miembros": {}
     }
   ],
