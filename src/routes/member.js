@@ -137,7 +137,7 @@ module.exports = (app) => {
     
     /**
      * @swagger
-     * /api/member/dni/{dni}:
+     * /api/member/{dni}:
      *  get:
      *      description: Obtiene el miembro en específico cuyo DNI coincide con el
      *                  dni pasado como parámetro.
@@ -165,7 +165,7 @@ module.exports = (app) => {
      *              description: Error. No existe ningún miembro con el DNI
      *                          especificado.
      */
-    app.get('/api/member/dni/:dni', (req, res, next) => {
+    app.get('/api/member/:dni', (req, res, next) => {
         var dato = dbFunc.db.get('miembros').find({dni: req.params.dni}).value();
         respuesta = {
             error: false,
@@ -239,14 +239,14 @@ module.exports = (app) => {
      *          "400":
      *              description: Error. Algunos atributos de miembro no son válidos.
      */
-    app.post('/api/member/:dni/:nombre/:apellido/:der/:comunidad', (req, res) => {
-        var parametros = req.params;
+    app.post('/api/member/:dni', (req, res) => {
+        var parametros = req.body;
         var apellido = 'Apellido no aportado'
 
         if (parametros.apellido != 'null' && parametros.apellido != 'undefined') {
             apellido = parametros.apellido
         }
-        var nuevo_miembro = new Miembro(parametros.dni, parametros.nombre, apellido, parametros.der, parametros.comunidad);
+        var nuevo_miembro = new Miembro(req.params.dni, parametros.nombre, apellido, parametros.der, parametros.comunidad);
         var resultado = dbFunc.insertDB(nuevo_miembro);
         respuesta = {
             error: resultado[0],

@@ -172,10 +172,15 @@ module.exports = (app) => {
         res.status(resultado[1]).send(respuesta);
     });
 
-    app.post('/api/community/:name/add-member/:dni', (req, res) => {
+    app.post('/api/community/:name/add-member/:dni', (req, res, next) => {
         var comunidad = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
         var miembro = dbFunc.db.get('miembros').find({dni: req.params.dni}).value();
         var nuevos_miembros = comunidad.miembros;
-        console.log(nuevos_miembros);
+        nuevos_miembros[miembro.dni] = miembro;
+
+        var nueva_com = new Comunidad(comunidad.name, comunidad.desc, comunidad.latitud, comunidad.longitud, comunidad.gestor_dni, nuevos_miembros);
+        updateDB(nueva_comunidad);
+
+        next()
     });
 }

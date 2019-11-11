@@ -45,7 +45,6 @@ function insertDB(object) {
                 var nuevos_miembros = com.miembros;
                 nuevos_miembros[object.dni] = object;
                 var nueva_com = new Comunidad(com.name, com.desc, com.latitud, com.longitud, com.gestor_dni, nuevos_miembros);
-                console.log(nueva_com)
                 updateDB(nueva_com);
 
                 return [false, 201, object];
