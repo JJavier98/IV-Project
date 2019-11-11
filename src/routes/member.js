@@ -300,7 +300,6 @@ module.exports = (app) => {
      */
     app.post('/api/member/:dni', (req, res) => {
         var parametros = req.body;
-        console.log(parametros)
         var apellido = 'Apellido no aportado'
 
         if (parametros.apellido != 'null' && parametros.apellido != 'undefined') {

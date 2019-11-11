@@ -38,7 +38,8 @@ app.use(express.urlencoded({extended: false})); // Captar texto enviado desde fo
 app.use(express.json());                        // Trabajar con archivos JSON
 app.use(cors());                                // Permite realizar las pruebas de funciones API desde Swagger
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs)); // muestra la documentación de la API en HTML
-app.use(bodyParser.json());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // Rutas
 // app.use(require('./routes/index'));
