@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const pm2 = require('pm2');
 var exec = require('child_process').exec;
-var jest = require('gulp-jest').default;
 var mocha = require('gulp-mocha');
 var swagger = require('gulp-swagger');
 var apidoc = require('gulp-apidoc');
