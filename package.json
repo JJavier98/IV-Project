@@ -55,6 +55,7 @@
     "gulp": "^4.0.2",
     "gulp-apidoc": "^0.2.8",
     "gulp-apidoc-swagger": "^0.2.2",
+    "gulp-cli": "^2.2.0",
     "gulp-mocha": "^7.0.2",
     "gulp-swagger": "^1.0.1",
     "jsdoc": "^3.6.3",
