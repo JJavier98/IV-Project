@@ -7,4 +7,4 @@ node_js:
 install:
   - npm install
 # Scripts a ejecutar para realizar los tests
-script: npm run all-tests
+script: gulp test
