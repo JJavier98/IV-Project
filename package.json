@@ -47,7 +47,7 @@
     "gulp-apidoc": "^0.2.8",
     "gulp-apidoc-swagger": "^0.2.2",
     "gulp-mocha": "^7.0.2",
-    "gulp-swagger": "^1.0.1",
+    "gulp-swagger": "^1.0.1"
   },
   "devDependencies": {
     "apidoc": "^0.17.7",
