@@ -7,9 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*mocha.js",
-    "test-api": "jest test/*.js",
-    "all-tests": "npm run test && npm run test-api",
+    "test": "mocha test/*.js",
     "dev": "nodemon src/index.js",
     "doc": "jsdoc src/*.js ./docs/main_page.md -d ./docs/ECM",
     "swagger": "swagger project edit"

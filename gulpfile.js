@@ -49,17 +49,8 @@ gulp.task('restart', function(cb) {
 
 // Ejecuta los test de mocha
 gulp.task('test', () => (
-    gulp.src('test/*.mocha.js', {read: false}).pipe(mocha({reporter:'spec'}))
+    gulp.src('test/*.js', {read: false}).pipe(mocha({reporter:'spec'}))
 ));
-
-// Comprueba la cobertura de los test sobre el código
-gulp.task('coveralls', function(cb) {
-  exec('npm run coveralls', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-})
 
 /*
 // Compila toda la documentación del proyecto y la almacena en el directorio docs/
