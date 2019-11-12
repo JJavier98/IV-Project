@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: "Install project dependencies"
-          command: sudo npm install --no-option -g
+          command: npm install
       - run:
           name: "Run tests"
-          command: gulp test
+          command: node node_modules/.bin/gulp test
