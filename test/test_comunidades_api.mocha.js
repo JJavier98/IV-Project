@@ -8,7 +8,7 @@ var comunidad = {
     "latitud": 100,
     "longitud": 85,
     "gestor_dni": "00000000X"
-  }
+}
 
 function execShellCommand(cmd) {
     const exec = require('child_process').exec;
