@@ -13,11 +13,5 @@ jobs:
           name: "Install project dependencies"
           command: npm install
       - run:
-          name: "Install gulp globally"
-          command: npm install gulp@latest -g
-      - run:
-          name: "Node version"
-          command: node --version
-      - run:
           name: "Run tests"
           command: gulp test
