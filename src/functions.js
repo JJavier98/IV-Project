@@ -264,7 +264,7 @@ function updateDB(object) {
  * @param {Miembro | Gestor | Comunidad | DER} object Instancia a eliminar de la DB
  * @returns {void}
  */
-function deleteXfromDB(object) {
+async function deleteXfromDB(object) {
     if (object instanceof Miembro && object.gestor == false) {
         if (db.get('miembros').find({dni: object.dni}).value() != undefined &&
         object.DER_name != undefined &&
