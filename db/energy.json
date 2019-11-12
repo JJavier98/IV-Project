@@ -7,6 +7,14 @@
       "DER_name": "DER_1",
       "community_name": "Com_1",
       "gestor": false
+    },
+    {
+      "dni": "456",
+      "name": "Pepe",
+      "last_name": "López",
+      "DER_name": "DER_1",
+      "community_name": "Com_1",
+      "gestor": false
     }
   ],
   "gestores": [
@@ -40,6 +48,14 @@
       "longitud": 85,
       "gestor_dni": "00000000Y",
       "miembros": {
+        "456": {
+          "dni": "456",
+          "name": "Pepe",
+          "last_name": "López",
+          "DER_name": "DER_1",
+          "community_name": "Com_1",
+          "gestor": false
+        },
         "12345678W": {
           "dni": "12345678W",
           "name": "Pepe",
@@ -64,7 +80,16 @@
       "latitud": 100,
       "longitud": 85,
       "gestor_dni": "00000000X",
-      "miembros": {}
+      "miembros": {
+        "12345678W": {
+          "dni": "12345678W",
+          "name": "Pepe",
+          "last_name": "'Apellido no aportado'",
+          "DER_name": "DER_1",
+          "community_name": "Com_1",
+          "gestor": false
+        }
+      }
     },
     {
       "name": "Com_3",
