@@ -8,6 +8,9 @@ const DER         = require('../src/DER');
 const fs          = require('fs');
 
 const db = low(new FileSync('db/energy.json'));
+if(!db) {
+    db = low(new FileSync('db\energy.json'));
+}
 
 let def = JSON.parse(fs.readFileSync('./db/default.json'))
 db.defaults(def)
