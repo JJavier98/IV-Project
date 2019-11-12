@@ -5,6 +5,8 @@ orbs:
 
 jobs:
   build:
+    docker:
+      - image: node-8.10.0
     executor:
       name: win/vs2019
       shell: powershell.exe
