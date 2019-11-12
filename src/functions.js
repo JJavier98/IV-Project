@@ -7,7 +7,7 @@ const Comunidad   = require('../src/comunidad');
 const DER         = require('../src/DER');
 const fs          = require('fs');
 
-const db = low(new FileSync('db/energy.json'));
+const db = low(new FileSync('db\\energy.json'));
 if(!db) {
     db = low(new FileSync('db\energy.json'));
     console.error('Estamos en windows')
