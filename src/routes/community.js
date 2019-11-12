@@ -1,13 +1,13 @@
-module.exports = (app) => {
+module.exports = async (app) => {
     // Bibliotecas
     const bodyParser  = require('body-parser');
     const dbFunc      = require('../functions.js');
     const Comunidad     = require('../comunidad');
 
     var urlencodedParser = bodyParser.urlencoded({extended:true});
-    app.locals.miembros = dbFunc.db.get('miembros').value();
-    app.locals.ders = dbFunc.db.get('der').value();
-    app.locals.comunidades = dbFunc.db.get('comunidades').value();
+    app.locals.miembros = await dbFunc.db.get('miembros').value();
+    app.locals.ders = await dbFunc.db.get('der').value();
+    app.locals.comunidades = await dbFunc.db.get('comunidades').value();
 
     // Routes
     /* DE MOMENTO QUEDA INUTILIZADO
@@ -78,7 +78,7 @@ module.exports = (app) => {
                                             }
                                         }
      */
-    app.get('/api/communities', (req, res) => {
+    app.get('/api/communities', async (req, res) => {
         var dato = app.locals.comunidades;
         respuesta = {
             error: false,
@@ -128,8 +128,8 @@ module.exports = (app) => {
      *              description: Error. No existe ningún miembro con el DNI
      *                          especificado.
      */
-    app.get('/api/community/:name', (req, res, next) => {
-        var dato = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
+    app.get('/api/community/:name', async (req, res, next) => {
+        var dato = await dbFunc.db.get('comunidades').find({name: req.params.name}).value();
         respuesta = {
             error: false,
             codigo: 200,
@@ -223,11 +223,11 @@ module.exports = (app) => {
      *          "400":
      *              description: Error. Algunos atributos de miembro no son válidos.
      */
-    app.post('/api/community/:name', (req, res) => {
+    app.post('/api/community/:name', async (req, res) => {
         var parametros = req.body;
         var nueva_comunidad = new Comunidad(req.params.name, parametros.desc, parametros.latitud,
             parametros.longitud, parametros.gestor_dni);
-        var resultado = dbFunc.insertDB(nueva_comunidad);
+        var resultado = await dbFunc.insertDB(nueva_comunidad);
         respuesta = {
             error: resultado[0],
             codigo: resultado[1],
@@ -292,16 +292,16 @@ module.exports = (app) => {
      *          "404":
      *              description: Error. La comunidad o el miembro no existen en la base de datos.
      */
-    app.put('/api/community/:name/add-member/:dni', (req, res) => {
-        var comunidad = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
-        var miembro = dbFunc.db.get('miembros').find({dni: req.params.dni}).value();
+    app.put('/api/community/:name/add-member/:dni', async (req, res) => {
+        var comunidad = await dbFunc.db.get('comunidades').find({name: req.params.name}).value();
+        var miembro = await dbFunc.db.get('miembros').find({dni: req.params.dni}).value();
         var nuevos_miembros = comunidad.miembros;
         nuevos_miembros[miembro.dni] = miembro;
 
         var nueva_comunidad = new Comunidad(comunidad.name, comunidad.desc, comunidad.latitud,
                                 comunidad.longitud, comunidad.gestor_dni, nuevos_miembros);
         
-        var resultado = dbFunc.updateDB(nueva_comunidad);
+        var resultado = await dbFunc.updateDB(nueva_comunidad);
 
         res.status(resultado[1]).send(resultado[2]);
     });
@@ -326,12 +326,12 @@ module.exports = (app) => {
      *          "404":
      *              description: Error. La comunidad no existe en la base de datos.
      */
-    app.delete('/api/community/:name', (req, res) => {
-        var comunidad = dbFunc.db.get('comunidades').find({name: req.params.name}).value();
+    app.delete('/api/community/:name', async (req, res) => {
+        var comunidad = await dbFunc.db.get('comunidades').find({name: req.params.name}).value();
         var nueva_comunidad = new Comunidad(comunidad.name, comunidad.desc, comunidad.latitud,
                                 comunidad.longitud, comunidad.gestor_dni, comunidad.miembros);
         
-        var resultado = dbFunc.deleteXfromDB(nueva_comunidad);
+        var resultado = await dbFunc.deleteXfromDB(nueva_comunidad);
 
         res.status(resultado[1]).send(resultado[2]);
     });

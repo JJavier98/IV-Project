@@ -1,4 +1,4 @@
-const app = require('../src/index')
+/*const app = require('../src/index')
 const supertest = require('supertest')
 const request = supertest(app.app)
 var exec = require('child_process').exec;
@@ -79,4 +79,4 @@ describe('GET /api/member/dni', () => {
 })
 
 
-execShellCommand('cat db/default.json > db/energy.json')
+execShellCommand('cat db/default.json > db/energy.json')*/
