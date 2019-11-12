@@ -10,6 +10,12 @@ const fs          = require('fs');
 const db = low(new FileSync('db/energy.json'));
 if(!db) {
     db = low(new FileSync('db\energy.json'));
+    console.error('Estamos en windows')
+    console.log('Estamos en windows')
+}
+else {
+    console.error('Estamos en linux')
+    console.log('Estamos en linux')
 }
 
 let def = JSON.parse(fs.readFileSync('./db/default.json'))
