@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: "Install project dependencies"
-          command: npm install
+          command: npm install --no-option -g
       - run:
           name: "Run tests"
           command: gulp test
