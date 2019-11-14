@@ -36,4 +36,4 @@ Como vemos en los comandos anteriores la herramienta de construcción es **Gulp*
 buidtool: gulpfile.js
 
 ## :computer: Integración contínua
-Se utiliza tanto [TravisCI](https://github.com/JJavier98/IV-Project/blob/master/docs/integracion_continua.md) como [CircleCI](https://github.com/JJavier98/IV-Project/blob/master/docs/integracion_continua.md) para respaldarnos en caso de que alguno de los dos servicios no esté operativo en algún momento, además de tener dos valoraciones que, en principio, deberían ser la misma. Nos preocupar lo contrario.
+Se utiliza tanto [TravisCI](https://github.com/JJavier98/IV-Project/blob/master/docs/integracion_continua.md) como [CircleCI](https://github.com/JJavier98/IV-Project/blob/master/docs/integracion_continua.md) para respaldarnos en caso de que alguno de los dos servicios no esté operativo en algún momento, además de tener dos valoraciones que, si no hay ningún fallo, daberían ser la misma.
