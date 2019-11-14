@@ -21,37 +21,10 @@ paths:
             properties:
               error:
                 type: boolean
-                example: false
               codigo:
                 type: number
-                example: 200
               mensaje:
                 type: object
-                example: {
-                          "name": "Com_1",
-                          "desc": "Comunidad número 1",
-                          "latitud": 90,
-                          "longitud": 85,
-                          "gestor_dni": "00000000Y",
-                          "miembros": {
-                            "12345678W": {
-                            "dni": "12345678W",
-                            "name": "Pepe",
-                            "last_name": "'Apellido no aportado'",
-                            "DER_name": "DER_1",
-                            "community_name": "Com_1",
-                            "gestor": false
-                            },
-                            "00000000X": {
-                                "dni": "00000000X",
-                                "name": "Pepe",
-                                "last_name": "López",
-                                "DER_name": "DER_1",
-                                "community_name": "Com_1",
-                                "gestor": false
-                            }
-                          }
-                        }
                         
   /api/community/{name}:
     get:
@@ -63,7 +36,6 @@ paths:
           name: name
           required: true
           type: string
-          example: Com_1
       responses:
         "200":
           description: Success. Obtiene el miembro de la base
@@ -73,20 +45,10 @@ paths:
             properties:
               error:
                 type: boolean
-                example: false
               codigo:
                 type: number
-                example: 200
               mensaje:
                 type: object
-                example: {
-                    "name": "Com_2",
-                    "desc": "Comunidad número 2",
-                    "latitud": 100,
-                    "longitud": 85,
-                    "gestor_dni": "00000000X",
-                    "miembros": {}
-                }
         "404":
           description: Error. No existe ningún miembro con el DNI
                     especificado.
@@ -100,7 +62,6 @@ paths:
           name: name
           required: true
           type: string
-          example: Com_1
         - in: body
           name: comunidad
           description: comunidad a crear
@@ -116,50 +77,35 @@ paths:
               desc:
                 type: string
                 description: breve descripción de la comunidad
-                example: Esta comunidad se dedica principalmente a la generación
-                        de energía eléctrica por medio de placas solares.
               latitud:
                 type: float
                 description: latitud geográfica a la que se encuentra la comunidad
-                example: 50
               longitud:
                 type: float
                 description: longitud geográfica a la que se encuentra la comunidad
-                example: 40
               gestor_dni:
                 type: string
                 description: DNI del gestor encargado de la comunidad
-                example: 00000000X
-          responses:
-            "201":
-              description: Success. Consigue crear la nueva comunidad
-              schema:
+      responses:
+        "201":
+          description: Success. Consigue crear la nueva comunidad
+          schema:
+            type: object
+            properties:
+              error:
+                type: boolean
+              codigo:
+                type: number
+              mensaje:
                 type: object
-                properties:
-                  error:
-                    type: boolean
-                    example: false
-                  codigo:
-                    type: number
-                    example: 200
-                  mensaje:
-                    type: object
-                    example: {
-                              "name": "Com_2",
-                              "desc": "Comunidad número 2",
-                              "latitud": 100,
-                              "longitud": 85,
-                              "gestor_dni": "00000000X",
-                              "miembros": {}
-                            }
-            "404":
-              description: Error. La comunidad o el DER asignado al miembro
-                          no existen en la base de datos.
-            "409":
-              description: Error. Ya existe un miembro en la DB con el DNI
-                          proporcionado.
-            "400":
-              description: Error. Algunos atributos de miembro no son válidos.
+        "404":
+          description: Error. La comunidad o el DER asignado al miembro
+                      no existen en la base de datos.
+        "409":
+          description: Error. Ya existe un miembro en la DB con el DNI
+                      proporcionado.
+        "400":
+          description: Error. Algunos atributos de miembro no son válidos.
     delete:
       description: Elimina una comunidad existente
       summary: Elimina una comunidad existente
@@ -169,7 +115,6 @@ paths:
           name: name
           required: true
           type: string
-          example: Com_1
           description: nombre de la comunidad que se va a eliminar
       responses:
         "200":
@@ -188,13 +133,11 @@ paths:
           name: name
           required: true
           type: string
-          example: Com_1
           description: nombre de la comunidad en la que se inserta el miembro
         - in: path
           name: dni
           required: true
           type: string
-          example: 12345678W
           description: DNI del miembro a insertar
       responses:
         "201":
@@ -204,28 +147,9 @@ paths:
             properties:
               error:
                 type: boolean
-                example: false
               codigo:
                 type: number
-                example: 200
               mensaje:
                 type: object
-                example: {
-                          "name": "Com_1",
-                          "desc": "Comunidad número 1",
-                          "latitud": 90,
-                          "longitud": 85,
-                          "gestor_dni": "00000000Y",
-                          "miembros": {
-                            "12345678W": {
-                            "dni": "12345678W",
-                            "name": "Pepe",
-                            "last_name": "'Apellido no aportado'",
-                            "DER_name": "DER_1",
-                            "community_name": "Com_1",
-                            "gestor": false
-                            }
-                          }
-                        }
         "404":
             description: Error. La comunidad o el miembro no existen en la base de datos.

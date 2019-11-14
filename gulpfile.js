@@ -6,6 +6,15 @@ var swagger = require('gulp-swagger');
 var apidoc = require('gulp-apidoc');
 var swaggerGenerator = require('gulp-apidoc-swagger');
 
+// Instala las dependencias necesarias para utilizar el microservicio
+gulp.task('install', function(cb) {
+  exec('npm install', function(err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+});
+
 // Tarea para iniciar el servidor creando una instancia de pm2
 gulp.task('start', function(cb) {
     pm2.connect(false, function(err) {
@@ -52,26 +61,15 @@ gulp.task('test', () => (
     gulp.src('test/*.js', {read: false}).pipe(mocha({reporter:'spec'}))
 ));
 
-/*
-// Compila toda la documentación del proyecto y la almacena en el directorio docs/
-gulp.task('doc', function(done){
-  exec('jsdoc ./src/gymManager.js -d ./docs/gymManager', function(err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    done(err);
-  });
-  apidoc({
-    src: "./src/routes",
-    dest: "./docs/rest",
-    config: "./"
-  }, done);
-});
-*/
-gulp.task('doc', function(done){
-    swaggerGenerator.exec({
-        src: "src/",
-        dest: "doc/"
-      });
+// Ejecuta los test de mocha
+gulp.task('open-url', () => (
+    exec('xdg-open http://localhost:8888/api-docs')
+));
+
+// Abre la web de documentación
+gulp.task('doc', async () => {
+  await exec('gulp start')
+  exec('gulp open-url')
 });
 
 // Tarea default que instala los requisitos y ejecuta los test posteriormente
