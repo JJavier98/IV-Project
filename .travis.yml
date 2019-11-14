@@ -5,7 +5,7 @@ node_js:
   - 8.10.0
 # Comando para instalar las dependencias
 install:
-  - gulp install
+  - npm install
 # Scripts a ejecutar para realizar los tests
 script:
   - gulp test
