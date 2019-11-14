@@ -1,4 +1,3 @@
-buidtool: gulpfile.js
 # :zap: Gestión de comunidades energéticas
 
 [![Build Status](https://travis-ci.org/JJavier98/IV-Project.svg?branch=master)](https://travis-ci.org/JJavier98/IV-Project) [![CircleCI](https://circleci.com/gh/JJavier98/IV-Project.svg?style=svg)](https://circleci.com/gh/JJavier98/IV-Project) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -34,7 +33,8 @@ gulp restart
 ```
 
 ## :hammer: Herramienta de construcción
-Como vemos en los comandos anteriores la herramienta de construcción es **Gulp**. Para saber más sobre ella clica [aqui](https://github.com/JJavier98/IV-Project/blob/master/docs/herramienta_de_construccion.md).
+Como vemos en los comandos anteriores la herramienta de construcción es **Gulp**. Para saber más sobre ella clica [aqui](https://github.com/JJavier98/IV-Project/blob/master/docs/herramienta_de_construccion.md).  
+buidtool:gulpfile.js
 
 ## :computer: Integración contínua
 Se utiliza tanto [TravisCI](https://github.com/JJavier98/IV-Project/blob/master/docs/integracion_continua.md) como [CircleCI](https://github.com/JJavier98/IV-Project/blob/master/docs/integracion_continua.md) para respaldarnos en caso de que alguno de los dos servicios no esté operativo en algún momento, además de tener dos valoraciones que, si no hay ningún fallo, daberían ser la misma.
