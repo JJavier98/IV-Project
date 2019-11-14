@@ -15,6 +15,7 @@ gulp install
 ```
 gulp test
 ```
+Pincha [aquí](https://github.com/JJavier98/IV-Project/blob/master/docs/tests.md) para ver una descripción más detallada de los tests realizados.
 
 ## :arrow_double_up: Iniciar microservicio
 ```
