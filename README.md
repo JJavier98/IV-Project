@@ -33,7 +33,8 @@ gulp restart
 ```
 
 ## :hammer: Herramienta de construcción
-Como vemos en los comandos anteriores la herramienta de construcción es **Gulp**. Para saber más sobre ella clica [aqui](https://github.com/JJavier98/IV-Project/blob/master/docs/herramienta_de_construccion.md).
+Como vemos en los comandos anteriores la herramienta de construcción es **Gulp**. Para saber más sobre ella clica [aqui](https://github.com/JJavier98/IV-Project/blob/master/docs/herramienta_de_construccion.md).  
+
 buidtool: gulpfile.js
 
 ## :computer: Integración contínua
