@@ -11,4 +11,4 @@ jobs:
           command: npm install
       - run:
           name: "Run tests"
-          command: gulp test
+          command: node node_modules/.bin/gulp test
