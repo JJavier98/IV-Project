@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: "Install project dependencies"
-          command: npm install
+          command: node node_modules/.bin/gulp install
       - run:
           name: "Run tests"
           command: node node_modules/.bin/gulp test
