@@ -43,6 +43,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // Rutas
 app.use(require('./routes/index'));
+app.use(require('./routes/status'));
 require('./routes/community')(app);
 require('./routes/member')(app);
 

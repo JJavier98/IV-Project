@@ -41,10 +41,34 @@ heroku apps:create --region eu nombre_API
 - eu: Hace refencia a la región europea.
 - nombre_API: Es el nombre que le quieras dar a tu API en Heroku.
 
+Aquí vemos cómo se ha creado la app del microservicio:
+![APP](./images/app-heroku.png)
+
 ### Definir ejecución
 
 Dentro del directorio de nuestra API (en la raíz) debemos crear un fichero llamado _Procfile_ en el que indicaremos el comando a ejecutar para el despliegue del servicio.
 
 ```bash
-web: node src/indes.js
+web: gulp start
 ```
+
+### Despliegue
+
+Ahora si hacemos un _push_ al repositorio en heroku se desplegará nuestro microservicio
+
+```bash
+git push heroku master
+```
+
+## GitHub
+
+Una vez hechos todos los pasos anteriores podremos enlazar el despliegue de la API con cada actualización del repositorio de nuestro servicio en GitHub.
+
+En nuestra app en Heroku debemos ir a la pestaña _Deploy_, seleccionar como método GitHub e indicar el nombre del repositorio que contiene nuestra aplicación.
+
+![Despliegue](./images/despliegue.png)
+
+Y por último habilitamos la opción de que espere a la validación de la Integración Contínua (Travis y CircleCI)
+
+![CI en Heroku](./images/ci.png)
+![CI en Heroku](./images/ci2.png)
