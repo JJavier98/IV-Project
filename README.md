@@ -38,3 +38,8 @@ buildtool: gulpfile.js
 
 ## :computer: Integración contínua
 Se utiliza tanto [TravisCI](https://github.com/JJavier98/IV-Project/blob/master/docs/integracion_continua.md) como [CircleCI](https://github.com/JJavier98/IV-Project/blob/master/docs/integracion_continua.md) para respaldarnos en caso de que alguno de los dos servicios no esté operativo en algún momento, además de tener dos valoraciones que, si no hay ningún fallo, daberían ser la misma.
+
+## :cloud: Despliegue Heroku
+El micro servicio ha sido desplegado en Heroku y mostramos los pasos seguidos para ello en este [enlace](https://github.com/JJavier98/IV-Project/blob/master/docs/heroku.md).
+
+Despliegue: https://energetic-communities-manager.herokuapp.com/
