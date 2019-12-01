@@ -23,12 +23,13 @@ module.exports = (app) => {
      *                  description: Success. Muestra la página correctamente.  
      *
      * 
+     */
     app.get('/member', (req, res) => {
         res.render(__dirname+'/../views/members.ejs', {
             title: 'Miembros'
         })
     });
-    */
+    
 
     /**
      * @ swagger
