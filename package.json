@@ -5,6 +5,9 @@
   "template": {
     "forceLanguage": "es"
   },
+  "engines": {
+    "node": "8.10.0"
+  },
   "main": "index.js",
   "scripts": {
     "test": "mocha test/*.js",

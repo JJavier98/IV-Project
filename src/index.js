@@ -42,7 +42,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // Rutas
-// app.use(require('./routes/index'));
+app.use(require('./routes/index'));
 require('./routes/community')(app);
 require('./routes/member')(app);
 
