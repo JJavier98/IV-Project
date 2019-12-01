@@ -68,7 +68,7 @@ En nuestra app en Heroku debemos ir a la pestaña _Deploy_, seleccionar como mé
 
 ![Despliegue](./images/despliegue.png)
 
-Y por último habilitamos la opción de que espere a la validación de la Integración Contínua (Travis y CircleCI)
+Y por último habilitamos la opción de que espere a la validación de la Integración Contínua (Travis y CircleCI) y clickamos en _Enable Automatic Deploys_
 
 ![CI en Heroku](./images/ci.png)
 ![CI en Heroku](./images/ci2.png)
