@@ -20,6 +20,8 @@ sudo snap install heroku --classic
 Obtendremos una salida que nos informará de la versión que se ha instalado.
 ![Install](./images/install.png)
 
+### Login
+
 Una vez instalado haremos _log in_. Este comando abrirá nuestro navegador y nos pedirá iniciar sesión.
 
 ```bash
@@ -27,3 +29,22 @@ heroku login
 ```
 
 Una vez consigamos "_loguearnos_" es un buen momento para cerciorarnos de que tenemos node, npm y git instalados. En caso negativo debemos instalarlos.
+
+### Crear una aplicación en Heroku
+
+Accedemos al directorio de nuestra API y ejecutamos el siguiente comando:
+
+```bash
+heroku apps:create --region eu nombre_API
+```
+
+- eu: Hace refencia a la región europea.
+- nombre_API: Es el nombre que le quieras dar a tu API en Heroku.
+
+### Definir ejecución
+
+Dentro del directorio de nuestra API (en la raíz) debemos crear un fichero llamado _Procfile_ en el que indicaremos el comando a ejecutar para el despliegue del servicio.
+
+```bash
+web: node src/indes.js
+```
