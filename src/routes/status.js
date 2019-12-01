@@ -3,7 +3,7 @@ const { Router } = require('express');
 const router = Router();
 
 // Routes
-router.get('/', (req, res) => {
+router.get('/status', (req, res) => {
     res
     .status(200)
     .send(
