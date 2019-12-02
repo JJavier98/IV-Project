@@ -10,14 +10,10 @@ node_js:
 before_install:
   # Iniciar sesión es docker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - sh docker-travis.sh
 # Comando para instalar las dependencias
 install:
   - npm install
 # Scripts a ejecutar para realizar los tests
 script:
   - gulp test
-deploy:
-  provider: script
-  script: sh docker-travis.sh
-  on:
-    branch: master
