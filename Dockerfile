@@ -15,6 +15,7 @@ COPY src ./src
 COPY db ./db
 COPY config ./config
 COPY gulpfile.js ./
+#COPY . .
 
 # Instalamos las dependencias del proyecto
 RUN npm install
