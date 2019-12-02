@@ -18,7 +18,6 @@ script:
   - gulp test
   - git add -A
   - git commit -m "cambios tras test"
-  - git push
 
 deploy:
   provider: script
