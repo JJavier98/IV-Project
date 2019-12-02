@@ -9,10 +9,7 @@ node_js:
 # Antes de instalar
 before_install:
   # Iniciar sesión es docker
-  - echo $DOCKER_PASSWORD | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t jjavier98/ecm .
-  - docker tag jjavier98/ecm jjavier98/ecm
-  - docker push jjavier98/ecm
+  - bash docker-travis.sh
 # Comando para instalar las dependencias
 install:
   - npm install
