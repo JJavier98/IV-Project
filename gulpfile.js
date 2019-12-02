@@ -38,6 +38,15 @@ gulp.task('start', function(cb) {
     pm2.disconnect();
 });
 
+// Inicia el servicio
+gulp.task('start-docker', function(cb) {
+  exec('node src/index.js', function(err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+});
+
 // Detiene la instancia de pm2 del servidor en ejecución
 gulp.task('stop', function(cb) {
   exec('node node_modules/.bin/pm2 stop ./src/index.js', function(err, stdout, stderr) {
