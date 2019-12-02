@@ -16,14 +16,14 @@ install:
 # Scripts a ejecutar para realizar los tests
 script:
   - gulp test
+  - git add -A
+  - git commit -m "cambios tras test"
+  - git push
 
 deploy:
   provider: script
   script:
     # push to dockerhub
-    - git add -A
-    - git commit -m "cambios tras test"
-    - git push
     - docker build -t ecm .
     - docker tag ecm jjavier98/ecm
     - docker push jjavier98/ecm
