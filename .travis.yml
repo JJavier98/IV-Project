@@ -1,6 +1,6 @@
-sudo: required
+sudo: 'required'
 services:
-  - docker
+  - 'docker'
 # Lenguaje utilizado
 language: node_js
 # Versión del lenguaje utilizada
@@ -16,14 +16,8 @@ install:
 # Scripts a ejecutar para realizar los tests
 script:
   - gulp test
-  - git add -A
-  - git commit -m "cambios tras test"
-
 deploy:
   provider: script
-  script:
-    # push to dockerhub
-    - docker build -t ecm .
-    - docker tag ecm jjavier98/ecm
-    - docker push jjavier98/ecm
-  branch: master
+  script: sh docker-travis.sh
+  on:
+    branch: master
