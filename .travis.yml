@@ -6,21 +6,15 @@ language: node_js
 # Versión del lenguaje utilizada
 node_js:
   - 8.10.0
-
 # Antes de instalar
 before_install:
   # Iniciar sesión es docker
   - echo $DOCKER_PASSWORD | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t jjavier98/ecm .
+  - docker push jjavier98/ecm
 # Comando para instalar las dependencias
 install:
   - npm install
 # Scripts a ejecutar para realizar los tests
 script:
   - gulp test
-  - docker build -t jjavier98/ecm .
-
-deploy:
-  provider: script
-  script: docker push jjavier98/ecm
-  on:    
-    branch: master
