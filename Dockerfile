@@ -10,11 +10,11 @@ WORKDIR /ecm
 ENV PORT 8888
 
 # Copiamos los archivos necesarios para el funcionamiento de la aplicación
-#COPY package.json ./
-#COPY src ./src
-#COPY db ./db
-#COPY config ./config
-#COPY gulpfile.js ./
+COPY package.json ./
+COPY src ./src
+COPY db ./db
+COPY config ./config
+COPY gulpfile.js ./
 
 # Instalamos las dependencias del proyecto
 RUN npm install
