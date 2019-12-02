@@ -10,7 +10,7 @@ node_js:
 # Antes de instalar
 before_install:
   # Iniciar sesión es docker
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 # Comando para instalar las dependencias
 install:
   - npm install
