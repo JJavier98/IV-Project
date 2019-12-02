@@ -10,7 +10,7 @@ node_js:
 # Antes de instalar
 before_install:
   # Iniciar sesión es docker
-  - docker login -u "$DOCKER_USERNAME" -p $DOCKER_PASSWORD
+  - echo $DOCKER_PASSWORD | docker login -u "$DOCKER_USERNAME" --password-stdin
 # Comando para instalar las dependencias
 install:
   - npm install
@@ -21,7 +21,6 @@ script:
 
 deploy:
   provider: script
-  script:
-    # push to dockerhub
-    docker push jjavier98/ecm
-  branch: master
+  script: docker push jjavier98/ecm
+  on:    
+    branch: master
