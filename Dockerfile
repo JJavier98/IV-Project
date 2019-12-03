@@ -7,6 +7,7 @@ LABEL maintainer='José Javier Alonso (jjavier.ar98@gmail.com)'
 # Creamos el directorio de trabajo de nuestro proyecto
 WORKDIR /ecm
 
+# Puerto
 ENV PORT 8888
 
 # Copiamos los archivos necesarios para el funcionamiento de la aplicación
