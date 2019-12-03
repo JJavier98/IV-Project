@@ -46,5 +46,88 @@ npm-debug.log
 Una vez tenemos los dos archivos listos podemos proceder a crear el contenedor.
 
 ```bash
-docker build -t ecm .
+$ docker build -t ecm .
+```
+
+'-t' nos permite nombrar al contenedor creado.
+'ecm' es el nombre asignado.
+'.' es el directorio donde se encuentra el Dockerfile.
+
+Tras la ejecución podemos comprobar que disponemos del contenedor ejecutando la orden:
+
+```bash
+$ docker build images
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ecm                 latest              7819e5898c86        19 seconds ago      244MB
+jjavier98/ecm       latest              6e5d3bb489f8        20 hours ago        245MB
+<none>              <none>              2134744511a3        20 hours ago        245MB
+node                8-alpine            26881633664e        2 weeks ago         67MB
+ubuntu              latest              2ca708c1c9cc        2 months ago        64.2MB
+hello-world         latest              fce289e99eb9        11 months ago       1.84kB
+```
+
+Como vemos el contenedor _ecm_ aparece como recientemente creado.
+
+Para probar su funcionamiento de manera local lo podemos ejecutar.
+
+```bash
+$ docker run -p 8888:8888 -d ecm
+```
+
+'-p' nos permite especificar el puerto de conexión.
+'-d' lanza la ejecución en segundo plano para no dejar ocupada la terminal.
+'ecm' es el nombre del contenedor que lanzamos.
+
+# DockerHub
+
+Una vez que tenemos nuestra imagen creada y hemos probado que funciona podemos subirla a DockerHub. Para ello debemos seguir los siguientes pasos:
+
+1. _Logearnos_ en docker
+    ```bash
+    docker login
+    ```
+2. Añadir un tag con nuestro nombre de usuario y la versión del contenedor
+    ```bash
+    docker tag ecm jjavier98/ecm:latest
+    ```
+    'jjavier98' es mi nombre de usuario en DockerHub.
+    'ecm' el container que queremos subir.
+    'latest' una etiqueta que describe la versión del container.  
+
+3. Hacer push
+    ```bash
+    docker push jjavier98/ecm:latest
+    ```
+
+Tras esto nuestro contenedor se habrá subido a la plataforma DockerHub y estará a disposición de toda la comunidad.
+
+## Construcción Automática
+
+Una vez nuestro contenedor se encuentra en DockerHub podemos hacer que se actualice de manera automática cada vez que realizamos un push a nuestro repositorio de GitHub. Esto nos ahorra tener que estar preocupándonos de ejecutar las órdenes de construcción, login, tag y push.  
+
+En nuestro perfil de DockerHub entramos en el contenedor que nos interesa automatizar y entramos al apartado de _'Builds'_. Aquí tendremos que indicar cuál es el repositorio de GitHub que hace referencia al contenido del container y marcar las opciones de _Autobuild_ y aunque no es obligatoria la de _BuildCaching_. La primera opción es la que actualizará el contenedor por cada push realizado al repositorio de GitHub, la segunda aprovechará los datos almacenados en caché de la anterior _build_ del contenedor para tardar menos. Por último haremos click en ***Save & Build*** y estará listo.
+
+![AutoDocker](./images/dockerHub.png)
+
+## Construcción Automática - TravisCI
+La opción anterior tiene el inconveniente de que, independientemente de si nuestros cambios en el microservicio son correctos o no, al hacer el _push_ a GitHub el contenedor será actualizado. Para evitar actualizar el contenedor con una versión con fallos vamos a realizar esta actualización en DockerHub desde TravisCI tras pasar los tests correspondientes al microservicio.
+
+Al archivo de configuración de TravisCI (_.travis.yml_) debemos añadirle las siguientes líneas:  
+Al principio del archivo:
+```bash
+sudo: 'required'
+services:
+  - 'docker'
+```
+Esto indicará que el comando 'sudo' es necesario y va a ser utilizado y que se requiere del servicio 'docker' para ejecutar próximas órdenes.
+
+Y finalmente subir el nuevo container
+
+```bash
+# Antes de instalar
+before_install:
+  # Iniciar sesión es docker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - bash docker_travis.sh
 ```
