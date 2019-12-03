@@ -95,8 +95,6 @@ module.exports = (app) => {
      *              '400':
      *                  description: Error. Algunos atributos de miembro no son válidos.
      */
-
-    /* DE MOMENTO QUEDA INUTILIZADO
     app.post('/member', urlencodedParser, (req, res) => {
         var data = req.body;
         var apellido;
@@ -115,7 +113,7 @@ module.exports = (app) => {
 
         res.status(resultado[1]).redirect('/member');
     });
-    */
+    
 
     /**
      * @swagger
