@@ -21,8 +21,8 @@ COPY gulpfile.js ./
 RUN npm install
 
 # Instalamos gulp, que es la herramienta de construcción principal
-RUN sudo npm install -g gulp
+# RUN sudo npm install -g gulp
 
-CMD ["gulp", "start-docker"]
+CMD ["node", "node_modules/.bin/gulp", "start-docker"]
 
 EXPOSE 8888

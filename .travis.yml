@@ -17,4 +17,4 @@ install:
   - npm install
 # Scripts a ejecutar para realizar los tests
 script:
-  - gulp test
+  - node node_modules/.bin/gulp test
