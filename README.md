@@ -7,27 +7,32 @@ Este microservicio es una utilidad para gestores de comunidades energéticas. Pe
 Su descripción queda más completa en el siguiente [enlace](https://github.com/JJavier98/IV-Project/blob/master/docs/objetivo_proyecto.md).
 
 ## :inbox_tray: Instalación
+Para instalar todas las dependencias del microservicio ejecutaremos:
 ```
 gulp install
 ```
 
 ## :ballot_box_with_check: Test
+Para cerciorarnos de que nuestra API no presenta fallos podemos testearla:
 ```
 gulp test
 ```
-Pincha [aquí](https://github.com/JJavier98/IV-Project/blob/master/docs/tests.md) para ver una descripción más detallada de los tests realizados.
+Pincha [aquí](https://github.com/JJavier98/IV-Project/blob/master/docs/tests.md) para ver una descripción más detallada de los tests realizados y [aqui](https://ecm-iv.herokuapp.com/api-docs/) para probar sus funcionalidades de manera dinámica y ver ejemplos de uso de la API.
 
 ## :arrow_double_up: Iniciar microservicio
+Para levantar el microservicio localmente en _localhost:8888_
 ```
 gulp start
 ```
 
 ## :arrow_double_down: Finalizar microservicio
+Para parar la ejecución del microservicio:
 ```
 gulp stop
 ```
 
 ## :repeat: Reiniciar microservicio
+Para reiniciar el microservicio:
 ```
 gulp restart
 ```
