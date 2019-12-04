@@ -1,5 +1,4 @@
 # Docker
-
 Para crear un contenedor con nuestra API vamos a usar el servicio de contenedores Docker. Para configurar el proceso necesitaremos crear un archivo _Dockerfile_ y, aunque no obligatorio, un _.dockerignore_.
 
 ## Dockerfile
@@ -101,6 +100,11 @@ Una vez que tenemos nuestra imagen creada y hemos probado que funciona podemos s
     ```bash
     docker push jjavier98/ecm:latest
     ```
+
+- Si queremos descargar nuestro contenedor con la imagen de nuestro servicio tan solo tendremos que hacer:
+```bash
+docker pull jjavier98/ecm:latest
+```
 
 Tras esto nuestro contenedor se habrá subido a la plataforma DockerHub y estará a disposición de toda la comunidad.
 
