@@ -42,7 +42,7 @@ node_modules
 npm-debug.log
 ```
 
-## Local
+## Creación
 Una vez tenemos los dos archivos listos podemos proceder a crear el contenedor.
 
 ```bash
@@ -66,6 +66,8 @@ node                8-alpine            26881633664e        2 weeks ago         
 ubuntu              latest              2ca708c1c9cc        2 months ago        64.2MB
 hello-world         latest              fce289e99eb9        11 months ago       1.84kB
 ```
+
+## Ejecución local
 
 Como vemos el contenedor _ecm_ aparece como recientemente creado.
 
@@ -122,12 +124,49 @@ services:
 ```
 Esto indicará que el comando 'sudo' es necesario y va a ser utilizado y que se requiere del servicio 'docker' para ejecutar próximas órdenes.
 
-Y finalmente subir el nuevo container
-
+Y por último, la ejecución de un script donde agrupamos todas las órdenes de despliegue.
 ```bash
-# Antes de instalar
-before_install:
-  # Iniciar sesión es docker
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - bash docker_travis.sh
 ```
+
+Al final, ._travis.yml_ tendrá el siguiente aspecto:
+
+```bash
+sudo: 'required'
+services:
+  - 'docker'
+# Lenguaje utilizado
+language: node_js
+# Versión del lenguaje utilizada
+node_js:
+  - 8.10.0
+# Comando para instalar las dependencias
+install:
+  - npm install
+# Scripts a ejecutar para realizar los tests
+script:
+  - node node_modules/.bin/gulp test
+  - bash docker_travis.sh
+```
+
+El script para el despliegue en Docker es _docker_travis.sh_ y consta de:
+```bash
+#!/bin/bash
+
+# Login
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+# Build
+docker build -t ecm .
+# Tag
+docker tag ecm jjavier98/ecm:latest
+# Push
+docker push jjavier98/ecm
+```
+
+Las variables DOCKER_PASSWORD y DOCKER_USERNAME son variables de entorno declaradas en TravisCI. Para ello tendremos que ir a nuestro repositorio en TravisCI e ir al apartado _More options/Settings_
+
+![Travis Options](images/travis.png)
+
+Una vez ahí nos desplazamos hasta el apartado _Environment Variables_ y declaramos estas dos variables con los valores de nuestro usuario y contraseña en DockerHub.
+
+![Env Vars](images/env-var.png)

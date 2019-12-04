@@ -72,3 +72,36 @@ Y por último habilitamos la opción de que espere a la validación de la Integr
 
 ![CI en Heroku](./images/ci.png)
 ![CI en Heroku](./images/ci2.png)
+
+## Docker
+Si tenemos nuestra aplicación en un contenedor Docker podemos optar por desplegar la API desde este contenedor. Para ello deberemos crear un nuevo fichero llamado _heroku.yml_ que contendrá lo siguiente:
+
+```yml
+build:
+  docker:
+    web: Dockerfile
+```
+
+Esto indica a Heroku que debe dar prioridad al despliegue según indica el archivo _Dockerfile_ en vez de desplegar según el _Procfile_ como hacía antes. Como ya teníamos una aplicación desplegada vamos a crear otra para así tener una funcionando desde el contenedor y otra directamente con los archivos fuente.
+
+Así que creamos un nuevo contenedor tal y como explicamos en la [documentación de Docker](https://github.com/JJavier98/IV-Project/blob/master/docs/docker.md) en el apartado _Creación_.
+
+Tras el _build_ del contenedor especificamos que el despliegue en heroku será a través de este:
+
+```bash
+# Este comando indica que debe priorizar
+# el archivo heroku.yml antes que el Procfile
+heroku stack:set container
+```
+
+Para el despliegue manual podemos ejecutar:
+
+```bash
+git push heroku master
+```
+
+Aunque es recomendable activar la actualización automática con los _push_ a GitHub como se ha explicado anteriormente.
+
+En esta imagen podemos ver como una aplicación está desplegada desde contenedor Docker y otra desde framework de Node.js.
+
+![Heroku](images/heroku-container.png)
