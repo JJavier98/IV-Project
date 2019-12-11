@@ -99,3 +99,6 @@ public
 
 # JSON Data Base local files
 .json
+
+# Datos de Vagrant
+.vagrant/

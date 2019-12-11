@@ -81,5 +81,10 @@ gulp.task('doc', async () => {
   exec('gulp open-url')
 });
 
+// Crea una VM con vagrant
+gulp.task('vm', async () => {
+  exec('vagrant up')
+});
+
 // Tarea default que instala los requisitos y ejecuta los test posteriormente
 gulp.task('default', gulp.series('test'));

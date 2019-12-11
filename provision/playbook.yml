@@ -1,0 +1,26 @@
+---
+# Como host tendremos el nombre que le hemos dado a la VM en Vagrant
+- hosts: ECM
+  # Necesitamos privilegios para instalar npm y git
+  become: yes
+  # COmenzamos la definición de tareas
+  tasks:
+    # Instala los paquetes básicos para comenzar con la instalación (npm y git)
+  - name: instala paquetes
+    apt:
+      pkg: ['npm', 'git']
+    # Seguimos con otro paquete básico, node, que lo instalamos mediante
+    # un script para poder definir la versión que queremos instalar
+  - name: instala nodejs
+    shell: install_nodejs_8.10.sh
+  # Clonamos el repositorio del microservicio una vez que ya hemos instalado git
+  - name: clona repositorio de microservicio
+    git:
+      repo: 'https://github.com/JJavier98/IV-Project'
+      dest: ./
+      clone: yes
+      update: no
+  # Instalamos todas las dependencias marcadas en package.json
+  - name: instala dependencias de package.json
+    npm:
+      path: ./IV-Project
