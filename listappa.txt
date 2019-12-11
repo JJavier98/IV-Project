@@ -1,7 +1,0 @@
-/etc/apt/sources.list.d/ansible-ubuntu-ansible-bionic.list:deb http://ppa.launchpad.net/ansible/ansible/ubuntu bionic main
-/etc/apt/sources.list.d/ansible-ubuntu-ansible-bionic.list:# deb-src http://ppa.launchpad.net/ansible/ansible/ubuntu bionic main
-/etc/apt/sources.list.d/ansible-ubuntu-ansible-bionic.list:# deb-src http://ppa.launchpad.net/ansible/ansible/ubuntu bionic main
-/etc/apt/sources.list.d/gezakovacs-ubuntu-ppa-bionic.list:deb http://ppa.launchpad.net/gezakovacs/ppa/ubuntu bionic main
-/etc/apt/sources.list.d/gezakovacs-ubuntu-ppa-bionic.list:# deb-src http://ppa.launchpad.net/gezakovacs/ppa/ubuntu bionic main
-/etc/apt/sources.list.d/webupd8team-ubuntu-sublime-text-3-bionic.list:deb http://ppa.launchpad.net/webupd8team/sublime-text-3/ubuntu bionic main
-/etc/apt/sources.list.d/webupd8team-ubuntu-sublime-text-3-bionic.list:# deb-src http://ppa.launchpad.net/webupd8team/sublime-text-3/ubuntu bionic main
