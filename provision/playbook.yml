@@ -3,24 +3,37 @@
 - hosts: ECM
   # Necesitamos privilegios para instalar npm y git
   become: yes
-  # COmenzamos la definición de tareas
+  # Comenzamos la definición de tareas
   tasks:
     # Instala los paquetes básicos para comenzar con la instalación (npm y git)
-  - name: instala paquetes
+  - name: instala npm
+    changed_when: false
     apt:
-      pkg: ['npm', 'git']
-    # Seguimos con otro paquete básico, node, que lo instalamos mediante
-    # un script para poder definir la versión que queremos instalar
-  - name: instala nodejs
-    shell: install_nodejs_8.10.sh
+      name: npm
+
+  - name: instala git
+    changed_when: false
+    apt:
+      name: git
   # Clonamos el repositorio del microservicio una vez que ya hemos instalado git
   - name: clona repositorio de microservicio
+    changed_when: false
     git:
       repo: 'https://github.com/JJavier98/IV-Project'
-      dest: ./
+      dest: ./IV-Project
       clone: yes
       update: no
+  # Seguimos con otro paquete básico, node, que lo instalamos mediante
+  # un script para poder definir la versión que queremos instalar
+  - name: instala nodejs
+    shell: ls -l /
+    changed_when: false
+
+  - name: instala nodejs
+    shell: ./IV-Project/provision/install_nodejs_8.10.sh
+    changed_when: false
   # Instalamos todas las dependencias marcadas en package.json
   - name: instala dependencias de package.json
+    changed_when: false
     npm:
       path: ./IV-Project
