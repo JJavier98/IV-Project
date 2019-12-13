@@ -61,5 +61,6 @@ El micro servicio ha sido desplegado en Azure mediante el contenedor Docker. Pue
 Despliegue Docker: https://ecm-iv.azurewebsites.net/
 
 ## Aprovisionamiento
-provision: provision/playbook.yml
+Documentación de todos los ficheros y pasos seguidos: https://github.com/JJavier98/IV-Project/blob/master/docs/vm.md  
+provision: provision/playbook.yml  
 Imagen en Vagrant: https://app.vagrantup.com/JJavier98/boxes/ECM
