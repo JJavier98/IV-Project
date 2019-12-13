@@ -102,3 +102,4 @@ public
 
 # Datos de Vagrant
 .vagrant/
+*.box

@@ -59,3 +59,7 @@ Despliegue Docker: https://ecm-iv.herokuapp.com/
 El micro servicio ha sido desplegado en Azure mediante el contenedor Docker. Puedes ver cómo en el suguiente [enlace](https://github.com/JJavier98/IV-Project/blob/master/docs/azure.md).
 
 Despliegue Docker: https://ecm-iv.azurewebsites.net/
+
+## Aprovisionamiento
+provision: provision/playbook.yml
+Imagen en Vagrant: https://app.vagrantup.com/JJavier98/boxes/ECM

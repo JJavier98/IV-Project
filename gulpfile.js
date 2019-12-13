@@ -82,8 +82,23 @@ gulp.task('doc', async () => {
 });
 
 // Crea una VM con vagrant
-gulp.task('vm', async () => {
+gulp.task('vm-up', async () => {
   exec('vagrant up')
+});
+
+// Para el funcionamiento de la vm
+gulp.task('vm-stop', async () => {
+  exec('vagrant halt')
+});
+
+// Elimina la vm
+gulp.task('vm-destroy', async () => {
+  exec('vagrant destroy')
+});
+
+// Conecta con la vm mediante ssh
+gulp.task('vm-ssh', async () => {
+  exec('vagrant ssh')
 });
 
 // Tarea default que instala los requisitos y ejecuta los test posteriormente
