@@ -25,8 +25,8 @@
       update: no
   # Seguimos con otro paquete básico, node, que lo instalamos mediante
   # un script para poder definir la versión que queremos instalar
-  - name: instala nodejs
-    shell: ls -l /
+  - name: permisos de ejecución a script
+    shell: chmod -x ./IV-Project/provision/install_nodejs_8.10.sh
     changed_when: false
 
   - name: instala nodejs
